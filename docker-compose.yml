@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - nova-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - NOVA_OLLAMA_BASE-URL=http://host.docker.internal:11434
+      - NOVA_OLLAMA_DEFAULT-MODEL=gemma3:4b
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - backend-db:/app/db
+    restart: always
+    networks:
+      - nova-network
+
+volumes:
+  backend-db:
+
+networks:
+  nova-network:
+    driver: bridge
