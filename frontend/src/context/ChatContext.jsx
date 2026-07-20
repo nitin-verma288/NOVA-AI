@@ -8,153 +8,44 @@ export const ChatProvider = ({ children }) => {
   const [currentChat, setCurrentChat] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [streamingMessage, setStreamingMessage] = useState('');
-  
+  const [streamingMessage, setStreamingMessage] = useState(''); // Keep as placeholder for typing indicator/fallback
+
   const eventSourceRef = useRef(null);
 
-  const mergeMessages = (localMessages = [], serverMessages = []) => {
-    if (!localMessages || localMessages.length === 0) return serverMessages || [];
-    if (!serverMessages || serverMessages.length === 0) return localMessages;
-
-    const merged = [];
-    const serverMessageMap = new Map();
-    const serverRoleContentMap = new Map();
-
-    serverMessages.forEach(msg => {
-      if (msg.id) {
-        serverMessageMap.set(String(msg.id), msg);
-      }
-      serverRoleContentMap.set(`${msg.role}:${msg.content}`, msg);
-    });
-
-    const usedServerIds = new Set();
-
-    localMessages.forEach(localMsg => {
-      let matchedServerMsg = null;
-      if (localMsg.id && serverMessageMap.has(String(localMsg.id))) {
-        matchedServerMsg = serverMessageMap.get(String(localMsg.id));
-      } else {
-        const key = `${localMsg.role}:${localMsg.content}`;
-        if (serverRoleContentMap.has(key)) {
-          matchedServerMsg = serverRoleContentMap.get(key);
-        }
-      }
-
-      if (matchedServerMsg) {
-        merged.push(matchedServerMsg);
-        usedServerIds.add(String(matchedServerMsg.id));
-      } else {
-        merged.push(localMsg);
-      }
-    });
-
-    serverMessages.forEach(serverMsg => {
-      if (!usedServerIds.has(String(serverMsg.id))) {
-        merged.push(serverMsg);
-      }
-    });
-
-    return merged.sort((a, b) => {
-      const timeA = new Date(a.createdAt).getTime();
-      const timeB = new Date(b.createdAt).getTime();
-      if (timeA !== timeB) return timeA - timeB;
-      return String(a.id).localeCompare(String(b.id));
-    });
-  };
-
-  const fetchChats = async () => {
+  // Load chat history on mount
+  const fetchChats = async (selectId = null) => {
     setLoading(true);
     try {
       const response = await api.get('/chat/history');
+      const fetchedChats = response.data || [];
       
-      setChats(prevChats => {
-        return response.data.map(serverChat => {
-          const prevChat = prevChats.find(c => c.id === serverChat.id);
-          if (prevChat) {
-            const merged = mergeMessages(prevChat.messages, serverChat.messages);
-            return {
-              ...serverChat,
-              messages: merged
-            };
-          }
-          return serverChat;
-        });
-      });
-
-      setCurrentChat(prev => {
-        if (!prev) return null;
-        const updated = response.data.find(c => c.id === prev.id);
-        if (updated) {
-          const merged = mergeMessages(prev.messages, updated.messages);
-          return {
-            ...updated,
-            messages: merged
-          };
+      // Sort pinned chats first, then by updatedAt
+      const sorted = [...fetchedChats].sort((a, b) => {
+        if (a.isPinned !== b.isPinned) {
+          return b.isPinned ? 1 : -1;
         }
-        return prev;
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
       });
+      
+      setChats(sorted);
+
+      if (selectId) {
+        const selected = sorted.find(c => c.id === selectId);
+        if (selected) {
+          setCurrentChat(selected);
+        }
+      } else {
+        setCurrentChat(prev => {
+          if (!prev) return null;
+          const updated = sorted.find(c => c.id === prev.id);
+          return updated || prev;
+        });
+      }
     } catch (error) {
       console.error('Failed to fetch chat history', error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const syncChatWithBackend = async (chatId, expectedAssistantContent) => {
-    const maxAttempts = 20;
-    const interval = 1000; // poll every 1 second
-    
-    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-      try {
-        const response = await api.get('/chat/history');
-        const updatedChat = response.data.find(c => c.id === chatId);
-        
-        const isSaved = updatedChat && updatedChat.messages && updatedChat.messages.some(
-          m => m.role === 'assistant' && m.content === expectedAssistantContent
-        );
-        
-        if (isSaved) {
-          setChats(prevChats => {
-            return response.data.map(serverChat => {
-              const prevChat = prevChats.find(c => c.id === serverChat.id);
-              if (prevChat) {
-                return {
-                  ...serverChat,
-                  messages: mergeMessages(prevChat.messages, serverChat.messages)
-                };
-              }
-              return serverChat;
-            });
-          });
-          
-          setCurrentChat(prev => {
-            if (!prev) return null;
-            if (prev.id === chatId) {
-              return {
-                ...updatedChat,
-                messages: mergeMessages(prev.messages, updatedChat.messages)
-              };
-            }
-            const updated = response.data.find(c => c.id === prev.id);
-            if (updated) {
-              return {
-                ...updated,
-                messages: mergeMessages(prev.messages, updated.messages)
-              };
-            }
-            return prev;
-          });
-          console.log(`Backend confirmed message saved on attempt ${attempt}`);
-          return;
-        }
-      } catch (error) {
-        console.error('Error syncing with backend', error);
-      }
-      await new Promise(resolve => setTimeout(resolve, interval));
-    }
-    
-    console.warn('Timed out waiting for backend to save assistant message. Fetching chats anyway.');
-    fetchChats();
   };
 
   useEffect(() => {
@@ -173,9 +64,11 @@ export const ChatProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await api.post('/chat/create', { title });
-      setChats(prev => [response.data, ...prev]);
-      setCurrentChat(response.data);
-      return response.data;
+      const newChat = response.data;
+      
+      setChats(prev => [newChat, ...prev]);
+      setCurrentChat(newChat);
+      return newChat;
     } catch (error) {
       console.error('Failed to create chat', error);
     } finally {
@@ -187,9 +80,12 @@ export const ChatProvider = ({ children }) => {
     try {
       await api.delete(`/chat/delete/${chatId}`);
       setChats(prev => prev.filter(c => c.id !== chatId));
-      if (currentChat && currentChat.id === chatId) {
-        setCurrentChat(null);
-      }
+      setCurrentChat(prev => {
+        if (prev && prev.id === chatId) {
+          return null;
+        }
+        return prev;
+      });
     } catch (error) {
       console.error('Failed to delete chat', error);
     }
@@ -198,52 +94,164 @@ export const ChatProvider = ({ children }) => {
   const togglePinChat = async (chatId) => {
     try {
       const response = await api.put(`/chat/pin/${chatId}`);
-      setChats(prev => prev.map(c => {
-        if (c.id === chatId) {
-          const merged = mergeMessages(c.messages, response.data.messages);
-          return {
-            ...response.data,
-            messages: merged
-          };
-        }
-        return c;
-      }).sort((a, b) => b.isPinned - a.isPinned || new Date(b.updatedAt) - new Date(a.updatedAt)));
-      
-      if (currentChat && currentChat.id === chatId) {
-        setCurrentChat(prev => {
-          if (!prev) return null;
-          return { ...prev, isPinned: response.data.isPinned };
+      const updatedChat = response.data;
+
+      setChats(prev => {
+        const mapped = prev.map(c => c.id === chatId ? { ...c, isPinned: updatedChat.isPinned } : c);
+        return mapped.sort((a, b) => {
+          if (a.isPinned !== b.isPinned) {
+            return b.isPinned ? 1 : -1;
+          }
+          return new Date(b.updatedAt) - new Date(a.updatedAt);
         });
-      }
+      });
+
+      setCurrentChat(prev => {
+        if (prev && prev.id === chatId) {
+          return { ...prev, isPinned: updatedChat.isPinned };
+        }
+        return prev;
+      });
     } catch (error) {
       console.error('Failed to pin chat', error);
     }
   };
 
-  const sendMessage = (chatId, message) => {
+  const syncChatWithBackend = async (chatId, expectedContent) => {
+    console.log('[DEBUG] ChatContext: syncChatWithBackend called', { chatId, expectedContentLength: expectedContent.length });
+    const fetchAndSwap = async () => {
+      try {
+        console.log('[DEBUG] ChatContext: Sending API request to /chat/history');
+        const response = await api.get('/chat/history');
+        console.log('[DEBUG] ChatContext: Received API response from /chat/history', { status: response.status, dataLength: response.data?.length });
+        const serverChats = response.data || [];
+        const updatedChat = serverChats.find(c => c.id === chatId);
+        console.log('[DEBUG] ChatContext: Found matching chat in history', { 
+          chatId, 
+          title: updatedChat?.title, 
+          messageCount: updatedChat?.messages?.length,
+          messages: updatedChat?.messages?.map(m => ({ id: m.id, role: m.role, contentLength: m.content?.length }))
+        });
+        const hasMsg = updatedChat?.messages?.some(
+          m => m.role === 'assistant' && m.content.trim() === expectedContent.trim()
+        );
+        console.log('[DEBUG] ChatContext: Check if expected assistant message is present in response', { hasMsg });
+        return { serverChats, updatedChat, hasMsg };
+      } catch (err) {
+        console.error('[DEBUG] ChatContext: Failed to sync history from backend', err);
+        return null;
+      }
+    };
+
+    // Try immediately
+    let res = await fetchAndSwap();
+
+    // If not found, wait 500ms and retry once to account for DB write latency
+    if (!res || !res.hasMsg) {
+      console.log('[DEBUG] ChatContext: Expected message not found in first fetch, waiting 500ms for DB write latency...');
+      await new Promise(resolve => setTimeout(resolve, 500));
+      res = await fetchAndSwap();
+    }
+
+    if (res && res.serverChats) {
+      const sorted = [...res.serverChats].sort((a, b) => {
+        if (a.isPinned !== b.isPinned) {
+          return b.isPinned ? 1 : -1;
+        }
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
+      });
+      
+      console.log('[DEBUG] ChatContext: Updating chats state');
+      setChats(prev => {
+        console.log('[DEBUG] ChatContext: React state before update (chats)', { count: prev.length });
+        const next = sorted;
+        console.log('[DEBUG] ChatContext: React state after update (chats)', { count: next.length });
+        return next;
+      });
+
+      if (res.updatedChat) {
+        setCurrentChat(prev => {
+          console.log('[DEBUG] ChatContext: React state before update (currentChat)', { 
+            id: prev?.id, 
+            messageCount: prev?.messages?.length,
+            messages: prev?.messages?.map(m => ({ id: m.id, role: m.role, isTemp: m.isTemp, content: m.content }))
+          });
+          if (prev && prev.id === chatId) {
+            const next = res.updatedChat;
+            console.log('[DEBUG] ChatContext: React state after update (currentChat)', { 
+              id: next?.id, 
+              messageCount: next?.messages?.length,
+              messages: next?.messages?.map(m => ({ id: m.id, role: m.role, content: m.content }))
+            });
+            return next;
+          }
+          return prev;
+        });
+      }
+    }
+  };
+
+  const sendMessage = (chatId, messageText) => {
     if (isStreaming) return;
 
+    console.log('[DEBUG] ChatContext: sendMessage entered', { chatId, messageText });
     setIsStreaming(true);
     setStreamingMessage('');
 
-    // Pre-inject user message locally to avoid UI latency
-    const localUserMsg = {
-      id: Date.now().toString(),
+    const tempUserMsgId = `temp-user-${Date.now()}`;
+    const userMsg = {
+      id: tempUserMsgId,
       role: 'user',
-      content: message,
+      content: messageText,
       createdAt: new Date().toISOString()
     };
 
+    const tempAssistantMsgId = `temp-assistant-${Date.now()}`;
+    const assistantMsg = {
+      id: tempAssistantMsgId,
+      role: 'assistant',
+      content: '',
+      isTemp: true,
+      createdAt: new Date().toISOString()
+    };
+
+    // Inject temporary user and assistant messages in-place immediately
     setCurrentChat(prev => {
-      if (!prev) return null;
-      return {
+      console.log('[DEBUG] ChatContext: React state before update (currentChat - inject temp)', {
+        id: prev?.id,
+        messages: prev?.messages?.map(m => ({ id: m.id, role: m.role, content: m.content }))
+      });
+      if (!prev || prev.id !== chatId) return prev;
+      const next = {
         ...prev,
-        messages: [...(prev.messages || []), localUserMsg]
+        messages: [...(prev.messages || []), userMsg, assistantMsg]
       };
+      console.log('[DEBUG] ChatContext: React state after update (currentChat - inject temp)', {
+        id: next?.id,
+        messages: next?.messages?.map(m => ({ id: m.id, role: m.role, content: m.content }))
+      });
+      return next;
+    });
+
+    setChats(prevChats => {
+      console.log('[DEBUG] ChatContext: React state before update (chats - inject temp)');
+      const next = prevChats.map(c => {
+        if (c.id === chatId) {
+          return {
+            ...c,
+            messages: [...(c.messages || []), userMsg, assistantMsg],
+            updatedAt: new Date().toISOString()
+          };
+        }
+        return c;
+      });
+      console.log('[DEBUG] ChatContext: React state after update (chats - inject temp)');
+      return next;
     });
 
     const token = localStorage.getItem('token');
-    const streamUrl = `${API_BASE_URL}/chat/stream?chatId=${chatId}&message=${encodeURIComponent(message)}&token=${token}`;
+    const streamUrl = `${API_BASE_URL}/chat/stream?chatId=${chatId}&message=${encodeURIComponent(messageText)}&token=${token}`;
+    console.log('[DEBUG] ChatContext: Opening EventSource', { streamUrl });
 
     const eventSource = new EventSource(streamUrl);
     eventSourceRef.current = eventSource;
@@ -251,56 +259,66 @@ export const ChatProvider = ({ children }) => {
     let accumulatedResponse = '';
 
     eventSource.onmessage = (event) => {
+      console.log('[DEBUG] ChatContext: eventSource.onmessage received chunk', { data: event.data });
       if (event.data === '[DONE]') {
+        console.log('[DEBUG] ChatContext: eventSource.onmessage [DONE] received. Closing stream.');
         eventSource.close();
-
-        // Create completed assistant message
-        const localAssistantMsg = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: accumulatedResponse,
-          createdAt: new Date().toISOString()
-        };
-
-        setCurrentChat(prev => {
-          if (!prev) return null;
-          const messages = prev.messages || [];
-          const exists = messages.some(m => m.content === localAssistantMsg.content && m.role === 'assistant');
-          if (exists) {
-            return prev;
-          }
-          return {
-            ...prev,
-            messages: [...messages, localAssistantMsg]
-          };
-        });
-
         setIsStreaming(false);
         setStreamingMessage('');
-        
-        // Wait until backend confirms that the assistant message has been saved
+        // Sync with backend to fetch the official messages with database IDs
         syncChatWithBackend(chatId, accumulatedResponse);
       } else {
+        let chunkContent = '';
         try {
           const parsed = JSON.parse(event.data);
           if (parsed && typeof parsed.content === 'string') {
-            accumulatedResponse += parsed.content;
-            setStreamingMessage(accumulatedResponse);
+            chunkContent = parsed.content;
           } else {
-            accumulatedResponse += event.data;
-            setStreamingMessage(accumulatedResponse);
+            chunkContent = event.data;
           }
         } catch (e) {
-          accumulatedResponse += event.data;
-          setStreamingMessage(accumulatedResponse);
+          chunkContent = event.data;
         }
+
+        accumulatedResponse += chunkContent;
+        setStreamingMessage(accumulatedResponse);
+
+        // Update the temporary assistant message content in real time
+        setCurrentChat(prev => {
+          if (!prev || prev.id !== chatId) return prev;
+          const updatedMessages = prev.messages.map(m => {
+            if (m.id === tempAssistantMsgId) {
+              return { ...m, content: accumulatedResponse };
+            }
+            return m;
+          });
+          return { ...prev, messages: updatedMessages };
+        });
+
+        setChats(prevChats => {
+          return prevChats.map(c => {
+            if (c.id === chatId) {
+              const updatedMessages = c.messages.map(m => {
+                if (m.id === tempAssistantMsgId) {
+                  return { ...m, content: accumulatedResponse };
+                }
+                return m;
+              });
+              return { ...c, messages: updatedMessages };
+            }
+            return c;
+          });
+        });
       }
     };
 
     eventSource.onerror = (error) => {
-      console.error('SSE Stream error', error);
+      console.error('[DEBUG] ChatContext: eventSource.onerror received error', error);
       eventSource.close();
       setIsStreaming(false);
+      setStreamingMessage('');
+      // Sync on error to fetch what was completed
+      syncChatWithBackend(chatId, accumulatedResponse);
     };
   };
 
@@ -308,24 +326,15 @@ export const ChatProvider = ({ children }) => {
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
       setIsStreaming(false);
-      
-      // If stopped, we append the partial response generated so far to the conversation history
-      const localAssistantStoppedMsg = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: streamingMessage + ' *[Generation stopped by user]*',
-        createdAt: new Date().toISOString()
-      };
-
-      setCurrentChat(prev => {
-        if (!prev) return null;
-        return {
-          ...prev,
-          messages: [...(prev.messages || []), localAssistantStoppedMsg]
-        };
-      });
-
       setStreamingMessage('');
+      
+      // Let backend persist what was streamed so far
+      // Wait 500ms and sync history to grab official records
+      setTimeout(() => {
+        if (currentChat) {
+          fetchChats(currentChat.id);
+        }
+      }, 500);
     }
   };
 

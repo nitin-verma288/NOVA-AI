@@ -83,11 +83,24 @@ public class ChatController {
     @GetMapping("/history")
     public ResponseEntity<List<ChatHistoryDto>> getHistory() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("[DEBUG] ChatController: getHistory called for user={}", username);
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         List<ChatHistory> chats = chatHistoryRepository.findByUserIdOrderByIsPinnedDescUpdatedAtDesc(user.getId());
+        log.info("[DEBUG] ChatController: getHistory found chats count={}", chats.size());
+        for (ChatHistory chat : chats) {
+            log.info("[DEBUG] ChatController: chat id={}, title={}, message count={}", 
+                chat.getId(), chat.getTitle(), chat.getMessages() != null ? chat.getMessages().size() : 0);
+            if (chat.getMessages() != null) {
+                for (Message m : chat.getMessages()) {
+                    log.info("[DEBUG] ChatController:   message id={}, role={}, contentLength={}, createdAt={}", 
+                        m.getId(), m.getRole(), m.getContent() != null ? m.getContent().length() : 0, m.getCreatedAt());
+                }
+            }
+        }
         List<ChatHistoryDto> dtos = chats.stream().map(this::mapToDto).collect(Collectors.toList());
+        log.info("[DEBUG] ChatController: getHistory returning DTOs count={}", dtos.size());
         return ResponseEntity.ok(dtos);
     }
 
@@ -157,18 +170,18 @@ public class ChatController {
 
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamMessage(@RequestParam String chatId, @RequestParam String message) {
-        log.info("ChatController: streamMessage entered with chatId={}, message={}", chatId, message);
+        log.info("[DEBUG] ChatController: streamMessage endpoint entered. chatId={}, message='{}'", chatId, message);
         try {
             SseEmitter emitter = new SseEmitter(180000L); // 3 minutes timeout
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            log.info("ChatController: authenticated username={}", username);
+            log.info("[DEBUG] ChatController: authenticated username={}", username);
             User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
             // 1. Check if tool plugin triggered
             String pluginResult = pluginService.executePluginIfTriggered(message);
             if (pluginResult != null) {
-                log.info("ChatController: plugin triggered with result length={}", pluginResult.length());
+                log.info("[DEBUG] ChatController: plugin triggered with result length={}", pluginResult.length());
                 executorService.submit(() -> {
                     try {
                         ChatHistory chat = chatHistoryRepository.findById(chatId)
@@ -191,7 +204,7 @@ public class ChatController {
                         emitter.send("[DONE]");
                         emitter.complete();
                     } catch (Exception e) {
-                        log.error("ChatController: error in plugin execution task", e);
+                        log.error("[DEBUG] ChatController: error in plugin execution task", e);
                         emitter.completeWithError(e);
                     }
                 });
@@ -199,7 +212,7 @@ public class ChatController {
             }
 
             // 2. Stream LLM Response
-            log.info("ChatController: calling streamChatResponse");
+            log.info("[DEBUG] ChatController: calling streamChatResponse");
             ollamaService.streamChatResponse(user, chatId, message, emitter);
 
             // 3. Scan for memory asynchronously
@@ -207,15 +220,17 @@ public class ChatController {
                 try {
                     // Wait slightly for streaming to finish before scanning
                     Thread.sleep(5000);
+                    log.info("[DEBUG] ChatController async: triggering memory extraction");
                     memoryService.extractMemoriesFromConversation(user, chatId);
                 } catch (Exception e) {
-                    log.error("Failed to run async memory extraction", e);
+                    log.error("[DEBUG] ChatController async: Failed to run async memory extraction", e);
                 }
             });
 
+            log.info("[DEBUG] ChatController: returning SseEmitter for chatId={}", chatId);
             return emitter;
         } catch (Exception e) {
-            log.error("ChatController: error in streamMessage endpoint", e);
+            log.error("[DEBUG] ChatController: error in streamMessage endpoint", e);
             throw e;
         }
     }

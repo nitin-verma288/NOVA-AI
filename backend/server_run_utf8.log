@@ -1,0 +1,666 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.nova:ai-assistant >------------------------
+[INFO] Building nova-ai-backend 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.4:run (default-cli) > test-compile @ ai-assistant >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ai-assistant ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ai-assistant ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ai-assistant ---
+[INFO] skip non existing resourceDirectory C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ai-assistant ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.3.4:run (default-cli) < test-compile @ ai-assistant <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.4:run (default-cli) @ ai-assistant ---
+[INFO] Attaching agents: []
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2026-07-20T16:15:33.122+05:30  INFO 33624 --- [           main] com.nova.ai.NovaAiApplication            : Starting NovaAiApplication using Java 23.0.2 with PID 33624 (C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\target\classes started by NITIN in C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend)
+2026-07-20T16:15:33.125+05:30 DEBUG 33624 --- [           main] com.nova.ai.NovaAiApplication            : Running with Spring Boot v3.3.4, Spring v6.1.13
+2026-07-20T16:15:33.127+05:30  INFO 33624 --- [           main] com.nova.ai.NovaAiApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-07-20T16:15:34.927+05:30  INFO 33624 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-20T16:15:35.098+05:30  INFO 33624 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 150 ms. Found 7 JPA repository interfaces.
+2026-07-20T16:15:39.603+05:30  INFO 33624 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-20T16:15:39.656+05:30  INFO 33624 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-20T16:15:39.657+05:30  INFO 33624 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2026-07-20T16:15:39.889+05:30  INFO 33624 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-20T16:15:39.892+05:30  INFO 33624 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6587 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2026-07-20T16:15:40.228+05:30  INFO 33624 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-20T16:15:40.451+05:30  INFO 33624 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-07-20T16:15:40.548+05:30  INFO 33624 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-20T16:15:41.533+05:30  INFO 33624 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-20T16:15:41.630+05:30  INFO 33624 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-20T16:15:41.975+05:30  INFO 33624 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@2c6927f0
+2026-07-20T16:15:41.980+05:30  INFO 33624 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-20T16:15:47.175+05:30  INFO 33624 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-20T16:15:47.361+05:30  INFO 33624 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-20T16:15:48.781+05:30 DEBUG 33624 --- [           main] c.n.ai.security.JwtAuthenticationFilter  : Filter 'jwtAuthenticationFilter' configured for use
+2026-07-20T16:15:49.339+05:30  INFO 33624 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-07-20T16:15:51.319+05:30  WARN 33624 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-20T16:15:52.267+05:30 DEBUG 33624 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-07-20T16:15:55.352+05:30  INFO 33624 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-07-20T16:15:55.392+05:30  INFO 33624 --- [           main] com.nova.ai.NovaAiApplication            : Started NovaAiApplication in 23.32 seconds (process running for 24.496)
+2026-07-20T16:16:25.507+05:30  INFO 33624 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-20T16:16:25.507+05:30  INFO 33624 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-20T16:16:25.510+05:30  INFO 33624 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-07-20T16:16:25.574+05:30 DEBUG 33624 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-20T16:16:25.635+05:30  INFO 33624 --- [nio-8080-exec-1] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/auth/login, JWT=null, isTokenValid=false
+2026-07-20T16:16:25.636+05:30  WARN 33624 --- [nio-8080-exec-1] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: Unauthenticated request to URI=/api/auth/login
+2026-07-20T16:16:25.644+05:30 DEBUG 33624 --- [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-20T16:16:25.648+05:30 DEBUG 33624 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2026-07-20T16:16:26.739+05:30 DEBUG 33624 --- [nio-8080-exec-1] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-20T16:16:27.163+05:30 DEBUG 33624 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:16:27.327+05:30  INFO 33624 --- [nio-8080-exec-2] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:16:27.344+05:30 DEBUG 33624 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:16:27.348+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:16:27.377+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:16:27.402+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=2
+2026-07-20T16:16:27.404+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:27.405+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:27.412+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:16:27.448+05:30 DEBUG 33624 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:16:27.453+05:30  INFO 33624 --- [nio-8080-exec-3] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:16:27.468+05:30 DEBUG 33624 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:16:27.469+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:16:27.486+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:16:27.489+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=2
+2026-07-20T16:16:27.490+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:27.490+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:27.490+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:16:39.705+05:30 DEBUG 33624 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/stream?chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4&message=What%20is%20the%20capital%20of%20France%3F&token=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP
+2026-07-20T16:16:39.710+05:30  INFO 33624 --- [nio-8080-exec-4] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/stream, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:16:39.728+05:30 DEBUG 33624 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/stream?chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4&message=What%20is%20the%20capital%20of%20France%3F&token=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP
+2026-07-20T16:16:39.747+05:30  INFO 33624 --- [nio-8080-exec-4] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: streamMessage endpoint entered. chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4, message='What is the capital of France?'
+2026-07-20T16:16:39.754+05:30  INFO 33624 --- [nio-8080-exec-4] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: authenticated username=testuser
+2026-07-20T16:16:39.823+05:30  INFO 33624 --- [nio-8080-exec-4] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: calling streamChatResponse
+2026-07-20T16:16:39.823+05:30  INFO 33624 --- [nio-8080-exec-4] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: streamChatResponse called for chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4, userMessage='What is the capital of France?'
+2026-07-20T16:16:39.825+05:30  INFO 33624 --- [nio-8080-exec-4] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: returning SseEmitter for chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4
+2026-07-20T16:16:39.834+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: started processing for chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4
+2026-07-20T16:16:40.084+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: available models=[gemma3:4b, qwen3:8b]
+2026-07-20T16:16:40.084+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: saving user message to database
+2026-07-20T16:16:40.132+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: DB values before user message save. Messages in chat: count=2
+2026-07-20T16:16:40.132+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:40.132+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:40.192+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: DB values after user message save. Messages in chat: count=3
+2026-07-20T16:16:40.193+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:40.193+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:40.193+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152528100
+2026-07-20T16:16:40.371+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: user message saved successfully
+2026-07-20T16:16:40.385+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: building chat payload
+2026-07-20T16:16:40.415+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: payload built length=713
+2026-07-20T16:16:40.423+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: active Ollama URL=http://localhost:11434
+2026-07-20T16:16:40.429+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: sending HTTP request to Ollama
+2026-07-20T16:16:42.167+05:30 DEBUG 33624 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:16:42.172+05:30  INFO 33624 --- [nio-8080-exec-5] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:16:42.187+05:30 DEBUG 33624 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:16:42.188+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:16:42.209+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:16:42.215+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:16:42.215+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:42.215+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:42.216+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:16:42.216+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:16:44.847+05:30  INFO 33624 --- [pool-2-thread-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController async: triggering memory extraction
+2026-07-20T16:16:54.746+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: Ollama response status code=200
+2026-07-20T16:16:54.747+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: start reading and streaming response chunks
+2026-07-20T16:16:54.755+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='The'
+2026-07-20T16:16:54.763+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"The"}'
+2026-07-20T16:16:54.968+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=' capital'
+2026-07-20T16:16:54.969+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":" capital"}'
+2026-07-20T16:16:55.187+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=' of'
+2026-07-20T16:16:55.188+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":" of"}'
+2026-07-20T16:16:55.444+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=' France'
+2026-07-20T16:16:55.445+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":" France"}'
+2026-07-20T16:16:55.681+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=' is'
+2026-07-20T16:16:55.681+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":" is"}'
+2026-07-20T16:16:55.919+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=' Paris'
+2026-07-20T16:16:55.919+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":" Paris"}'
+2026-07-20T16:16:56.124+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='.'
+2026-07-20T16:16:56.124+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"."}'
+2026-07-20T16:16:56.357+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=' '
+2026-07-20T16:16:56.358+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":" "}'
+2026-07-20T16:16:56.566+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='
+
+'
+2026-07-20T16:16:56.566+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"\n\n"}'
+2026-07-20T16:16:56.771+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='```'
+2026-07-20T16:16:56.772+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"```"}'
+2026-07-20T16:16:57.005+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='
+'
+2026-07-20T16:16:57.006+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"\n"}'
+2026-07-20T16:16:57.169+05:30 DEBUG 33624 --- [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:16:57.173+05:30  INFO 33624 --- [nio-8080-exec-6] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:16:57.192+05:30 DEBUG 33624 --- [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:16:57.196+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:16:57.224+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:16:57.229+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='paris'
+2026-07-20T16:16:57.229+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:16:57.230+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:57.230+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"paris"}'
+2026-07-20T16:16:57.230+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:57.230+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:16:57.230+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:16:57.439+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='
+'
+2026-07-20T16:16:57.439+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"\n"}'
+2026-07-20T16:16:57.640+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content='```'
+2026-07-20T16:16:57.641+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":"```"}'
+2026-07-20T16:16:57.864+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: received chunk content=''
+2026-07-20T16:16:57.864+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{"content":""}'
+2026-07-20T16:16:57.867+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: done parsing response chunks
+2026-07-20T16:16:57.870+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl async thread: saving assistant response to database length=47
+2026-07-20T16:16:57.880+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: DB values before assistant message save. Messages in chat: count=3
+2026-07-20T16:16:57.880+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:57.880+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:57.880+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:16:57.882+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: DB values after assistant message save. Messages in chat: count=4
+2026-07-20T16:16:57.882+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:16:57.882+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:16:57.882+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:16:57.884+05:30  INFO 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl:   msg id=29bd114b-9886-48f5-ad37-94583ef99398, role=assistant, contentLength=47, createdAt=2026-07-20T16:16:57.881144900
+2026-07-20T16:17:01.332+05:30 ERROR 33624 --- [pool-1-thread-1] c.n.ai.service.impl.OllamaServiceImpl    : [DEBUG] OllamaServiceImpl: Error in streaming response from Ollama
+
+org.springframework.orm.jpa.JpaSystemException: Unable to commit against JDBC Connection
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:341) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:152) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionOperations.executeWithoutResult(TransactionOperations.java:67) ~[spring-tx-6.1.13.jar:6.1.13]
+	at com.nova.ai.service.impl.OllamaServiceImpl.lambda$streamChatResponse$12(OllamaServiceImpl.java:253) ~[classes/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: org.hibernate.TransactionException: Unable to commit against JDBC Connection
+	at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:97) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:268) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-6.1.13.jar:6.1.13]
+	... 10 common frames omitted
+Caused by: org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.throwex(DB.java:1150) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.exec(DB.java:198) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.SQLiteConnection.commit(SQLiteConnection.java:449) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at com.zaxxer.hikari.pool.ProxyConnection.commit(ProxyConnection.java:378) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.commit(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:87) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	... 13 common frames omitted
+
+2026-07-20T16:17:01.381+05:30 DEBUG 33624 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:01.386+05:30  INFO 33624 --- [nio-8080-exec-7] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:01.403+05:30 DEBUG 33624 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:01.405+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:01.422+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:01.426+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:01.426+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:01.427+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:01.427+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:01.427+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:01.466+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/stream?chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4&message=What%20is%20the%20capital%20of%20France%3F&token=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP
+2026-07-20T16:17:01.466+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/stream?chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4&message=What%20is%20the%20capital%20of%20France%3F&token=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP
+2026-07-20T16:17:01.478+05:30 ERROR 33624 --- [nio-8080-exec-8] c.n.ai.exception.GlobalExceptionHandler  : Unexpected error occurred: 
+
+org.springframework.orm.jpa.JpaSystemException: Unable to commit against JDBC Connection
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:341) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:152) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionOperations.executeWithoutResult(TransactionOperations.java:67) ~[spring-tx-6.1.13.jar:6.1.13]
+	at com.nova.ai.service.impl.OllamaServiceImpl.lambda$streamChatResponse$12(OllamaServiceImpl.java:253) ~[classes/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: org.hibernate.TransactionException: Unable to commit against JDBC Connection
+	at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:97) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:268) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-6.1.13.jar:6.1.13]
+	... 10 common frames omitted
+Caused by: org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.throwex(DB.java:1150) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.exec(DB.java:198) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.SQLiteConnection.commit(SQLiteConnection.java:449) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at com.zaxxer.hikari.pool.ProxyConnection.commit(ProxyConnection.java:378) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.commit(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:87) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	... 13 common frames omitted
+
+2026-07-20T16:17:01.491+05:30  WARN 33624 --- [nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Failure in @ExceptionHandler com.nova.ai.exception.GlobalExceptionHandler#handleGlobalException(Exception)
+
+org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class com.nova.ai.exception.GlobalExceptionHandler$ErrorResponse] with preset Content-Type 'text/event-stream'
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:319) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:245) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:432) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:74) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:175) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1358) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1161) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.30.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.30.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:91) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:632) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.doDispatch(ApplicationDispatcher.java:560) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.dispatch(ApplicationDispatcher.java:531) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.AsyncContextImpl$AsyncRunnable.run(AsyncContextImpl.java:601) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.AsyncContextImpl.doInternalDispatch(AsyncContextImpl.java:344) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.connector.CoyoteAdapter.asyncDispatch(CoyoteAdapter.java:239) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProcessor.dispatch(AbstractProcessor.java:243) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2026-07-20T16:17:01.501+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-20T16:17:01.503+05:30 ERROR 33624 --- [nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.throwex(DB.java:1150) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.exec(DB.java:198) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.SQLiteConnection.commit(SQLiteConnection.java:449) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at com.zaxxer.hikari.pool.ProxyConnection.commit(ProxyConnection.java:378) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.commit(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:87) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:268) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:152) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionOperations.executeWithoutResult(TransactionOperations.java:67) ~[spring-tx-6.1.13.jar:6.1.13]
+	at com.nova.ai.service.impl.OllamaServiceImpl.lambda$streamChatResponse$12(OllamaServiceImpl.java:253) ~[classes/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2026-07-20T16:17:01.504+05:30 ERROR 33624 --- [nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.orm.jpa.JpaSystemException: Unable to commit against JDBC Connection] with root cause
+
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.throwex(DB.java:1150) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.core.DB.exec(DB.java:198) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at org.sqlite.SQLiteConnection.commit(SQLiteConnection.java:449) ~[sqlite-jdbc-3.46.0.0.jar:na]
+	at com.zaxxer.hikari.pool.ProxyConnection.commit(ProxyConnection.java:378) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.commit(HikariProxyConnection.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:87) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:268) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:152) ~[spring-tx-6.1.13.jar:6.1.13]
+	at org.springframework.transaction.support.TransactionOperations.executeWithoutResult(TransactionOperations.java:67) ~[spring-tx-6.1.13.jar:6.1.13]
+	at com.nova.ai.service.impl.OllamaServiceImpl.lambda$streamChatResponse$12(OllamaServiceImpl.java:253) ~[classes/:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2026-07-20T16:17:01.508+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/stream?chatId=15f1be10-fbda-47ab-802a-e688bef8d4e4&message=What%20is%20the%20capital%20of%20France%3F&token=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP
+2026-07-20T16:17:01.508+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-20T16:17:01.509+05:30 ERROR 33624 --- [nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+
+org.springframework.security.access.AccessDeniedException: Access Denied
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:98) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:91) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:632) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.doInclude(ApplicationDispatcher.java:510) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.include(ApplicationDispatcher.java:453) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:343) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:222) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:308) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:149) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.connector.CoyoteAdapter.asyncDispatch(CoyoteAdapter.java:239) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProcessor.dispatch(AbstractProcessor.java:243) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2026-07-20T16:17:01.524+05:30 ERROR 33624 --- [nio-8080-exec-8] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing [ErrorPage[errorCode=0, location=/error]]
+
+jakarta.servlet.ServletException: Unable to handle the Spring Security Exception because the response is already committed.
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:144) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:91) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.1.13.jar:6.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:632) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.doInclude(ApplicationDispatcher.java:510) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.ApplicationDispatcher.include(ApplicationDispatcher.java:453) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:343) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:222) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:308) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:149) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.catalina.connector.CoyoteAdapter.asyncDispatch(CoyoteAdapter.java:239) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProcessor.dispatch(AbstractProcessor.java:243) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+Caused by: org.springframework.security.access.AccessDeniedException: Access Denied
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:98) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.3.jar:6.3.3]
+	... 67 common frames omitted
+
+2026-07-20T16:17:01.957+05:30 DEBUG 33624 --- [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:01.961+05:30  INFO 33624 --- [nio-8080-exec-9] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:01.974+05:30 DEBUG 33624 --- [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:01.976+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:01.989+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:01.991+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:01.991+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:01.991+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:01.993+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:01.993+05:30  INFO 33624 --- [nio-8080-exec-9] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:12.173+05:30 DEBUG 33624 --- [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:12.179+05:30  INFO 33624 --- [io-8080-exec-10] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:12.201+05:30 DEBUG 33624 --- [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:12.206+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:12.228+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:12.231+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:12.232+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:12.232+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:12.232+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:12.232+05:30  INFO 33624 --- [io-8080-exec-10] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:15.534+05:30  INFO 33624 --- [pool-2-thread-1] c.n.ai.service.impl.MemoryServiceImpl    : Extracted and saved new memory for user: User initiated a query about the capital of France
+2026-07-20T16:17:15.731+05:30 DEBUG 33624 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:15.735+05:30  INFO 33624 --- [nio-8080-exec-1] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:15.747+05:30 DEBUG 33624 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:15.748+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:15.763+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:15.767+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:15.767+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:15.768+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:15.768+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:15.768+05:30  INFO 33624 --- [nio-8080-exec-1] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:15.774+05:30 DEBUG 33624 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:15.778+05:30  INFO 33624 --- [nio-8080-exec-2] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:15.788+05:30 DEBUG 33624 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:15.789+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:15.801+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:15.804+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:15.805+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:15.805+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:15.805+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:15.805+05:30  INFO 33624 --- [nio-8080-exec-2] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:15.827+05:30 DEBUG 33624 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:15.831+05:30  INFO 33624 --- [nio-8080-exec-3] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:15.845+05:30 DEBUG 33624 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:15.846+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:15.858+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:15.861+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:15.862+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:15.862+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:15.862+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:15.863+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:15.870+05:30 DEBUG 33624 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:15.873+05:30  INFO 33624 --- [nio-8080-exec-3] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:15.884+05:30 DEBUG 33624 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:15.885+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:15.894+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:15.897+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:15.897+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:15.898+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:15.898+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:15.898+05:30  INFO 33624 --- [nio-8080-exec-3] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:30.825+05:30 DEBUG 33624 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:30.827+05:30  INFO 33624 --- [nio-8080-exec-5] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:30.838+05:30 DEBUG 33624 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:30.840+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:30.857+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:30.863+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:30.863+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:30.863+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:30.863+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:30.863+05:30  INFO 33624 --- [nio-8080-exec-5] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:17:45.808+05:30 DEBUG 33624 --- [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:17:45.811+05:30  INFO 33624 --- [nio-8080-exec-6] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:17:45.817+05:30 DEBUG 33624 --- [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:17:45.819+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:17:45.829+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:17:45.831+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:17:45.831+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:17:45.831+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:17:45.831+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:17:45.831+05:30  INFO 33624 --- [nio-8080-exec-6] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:18:00.806+05:30 DEBUG 33624 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:18:00.808+05:30  INFO 33624 --- [nio-8080-exec-7] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:18:00.821+05:30 DEBUG 33624 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:18:00.823+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:18:00.832+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:18:00.835+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:18:00.835+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:18:00.836+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:18:00.836+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:18:00.836+05:30  INFO 33624 --- [nio-8080-exec-7] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1
+2026-07-20T16:18:15.819+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history
+2026-07-20T16:18:15.823+05:30  INFO 33624 --- [nio-8080-exec-8] c.n.ai.security.JwtAuthenticationFilter  : JWT Filter: URI=/api/chat/history, JWT=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc4NDU0NDM4NiwiZXhwIjoxNzg0NjMwNzg2fQ.JYGVrD4TKrjT_Ll_ugcJJm0RhTJxY38ZDPfk8sk0aT3w3gxuoy7G38TgUymTRkbP, isTokenValid=true
+2026-07-20T16:18:15.834+05:30 DEBUG 33624 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history
+2026-07-20T16:18:15.836+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory called for user=testuser
+2026-07-20T16:18:15.848+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory found chats count=1
+2026-07-20T16:18:15.852+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: chat id=15f1be10-fbda-47ab-802a-e688bef8d4e4, title=Hello..., message count=3
+2026-07-20T16:18:15.852+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=c59256e5-4df4-4ddb-b96c-07edf696fc93, role=user, contentLength=5, createdAt=2026-07-20T16:13:11.717
+2026-07-20T16:18:15.852+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=aaa9d78a-a662-405d-a4b0-c2c3a3e1b35c, role=assistant, contentLength=120, createdAt=2026-07-20T16:13:44.758
+2026-07-20T16:18:15.852+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController:   message id=53b90f2d-88fb-40fc-9830-aa2e938fd8ca, role=user, contentLength=30, createdAt=2026-07-20T16:16:40.152
+2026-07-20T16:18:15.853+05:30  INFO 33624 --- [nio-8080-exec-8] com.nova.ai.controller.ChatController    : [DEBUG] ChatController: getHistory returning DTOs count=1

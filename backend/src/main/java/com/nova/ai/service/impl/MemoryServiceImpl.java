@@ -33,15 +33,18 @@ public class MemoryServiceImpl implements MemoryService {
     private final ChatHistoryRepository chatHistoryRepository;
     private final OllamaService ollamaService;
     private final ObjectMapper objectMapper;
+    private final org.springframework.transaction.support.TransactionTemplate transactionTemplate;
 
     public MemoryServiceImpl(MemoryRepository memoryRepository,
                              ChatHistoryRepository chatHistoryRepository,
                              @Lazy OllamaService ollamaService,
-                             ObjectMapper objectMapper) {
+                             ObjectMapper objectMapper,
+                             org.springframework.transaction.support.TransactionTemplate transactionTemplate) {
         this.memoryRepository = memoryRepository;
         this.chatHistoryRepository = chatHistoryRepository;
         this.ollamaService = ollamaService;
         this.objectMapper = objectMapper;
+        this.transactionTemplate = transactionTemplate;
     }
 
     @Override
@@ -154,18 +157,22 @@ public class MemoryServiceImpl implements MemoryService {
 
     @Override
     @Async
-    @Transactional
     public void extractMemoriesFromConversation(User user, String chatId) {
         if (user.getSettings() != null && !user.getSettings().getMemoryEnabled()) {
             return;
         }
 
         try {
-            ChatHistory chat = chatHistoryRepository.findById(chatId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Chat history not found"));
+            // Read chat history and messages in a short transaction
+            List<Message> messages = transactionTemplate.execute(status -> {
+                ChatHistory chat = chatHistoryRepository.findById(chatId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Chat history not found"));
+                // Force load of messages collection
+                chat.getMessages().size();
+                return new ArrayList<>(chat.getMessages());
+            });
 
-            List<Message> messages = chat.getMessages();
-            if (messages.size() < 2) return;
+            if (messages == null || messages.size() < 2) return;
 
             // Take the last 4 messages to inspect
             int start = Math.max(0, messages.size() - 4);
@@ -203,32 +210,35 @@ public class MemoryServiceImpl implements MemoryService {
 
             if (jsonStr.startsWith("[") && jsonStr.endsWith("]")) {
                 JsonNode arrayNode = objectMapper.readTree(jsonStr);
-                List<Memory> currentMemories = memoryRepository.findByUserId(user.getId());
 
-                for (JsonNode item : arrayNode) {
-                    if (item.has("category") && item.has("content")) {
-                        String category = item.get("category").asText().toLowerCase();
-                        String content = item.get("content").asText();
+                // Write new memories in another short transaction
+                transactionTemplate.executeWithoutResult(status -> {
+                    List<Memory> currentMemories = memoryRepository.findByUserId(user.getId());
+                    for (JsonNode item : arrayNode) {
+                        if (item.has("category") && item.has("content")) {
+                            String category = item.get("category").asText().toLowerCase();
+                            String content = item.get("content").asText();
 
-                        if (content.trim().isEmpty()) continue;
+                            if (content.trim().isEmpty()) continue;
 
-                        // Check duplicate
-                        boolean duplicate = currentMemories.stream().anyMatch(m -> 
-                            m.getCategory().equalsIgnoreCase(category) && 
-                            m.getContent().equalsIgnoreCase(content)
-                        );
+                            // Check duplicate
+                            boolean duplicate = currentMemories.stream().anyMatch(m -> 
+                                m.getCategory().equalsIgnoreCase(category) && 
+                                m.getContent().equalsIgnoreCase(content)
+                            );
 
-                        if (!duplicate) {
-                            Memory newMem = Memory.builder()
-                                    .user(user)
-                                    .category(category)
-                                    .content(content)
-                                    .build();
-                            memoryRepository.save(newMem);
-                            log.info("Extracted and saved new memory for user: {}", content);
+                            if (!duplicate) {
+                                Memory newMem = Memory.builder()
+                                        .user(user)
+                                        .category(category)
+                                        .content(content)
+                                        .build();
+                                memoryRepository.save(newMem);
+                                log.info("Extracted and saved new memory for user: {}", content);
+                            }
                         }
                     }
-                }
+                });
             }
 
         } catch (Exception e) {

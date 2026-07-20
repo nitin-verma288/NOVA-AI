@@ -144,19 +144,24 @@ public class OllamaServiceImpl implements OllamaService {
 
     @Override
     public void streamChatResponse(User user, String chatId, String userMessage, SseEmitter emitter) {
-        log.info("OllamaServiceImpl: streamChatResponse called for chatId={}", chatId);
+        log.info("[DEBUG] OllamaServiceImpl: streamChatResponse called for chatId={}, userMessage='{}'", chatId, userMessage);
         executorService.submit(() -> {
-            log.info("OllamaServiceImpl async thread: started processing for chatId={}", chatId);
+            log.info("[DEBUG] OllamaServiceImpl async thread: started processing for chatId={}", chatId);
             try {
                 // Get available models first (non-blocking for DB)
                 List<String> available = getAvailableModels();
-                log.info("OllamaServiceImpl async thread: available models={}", available);
+                log.info("[DEBUG] OllamaServiceImpl async thread: available models={}", available);
 
                 // Save user message in a transaction context
-                log.info("OllamaServiceImpl async thread: saving user message to database");
+                log.info("[DEBUG] OllamaServiceImpl async thread: saving user message to database");
                 transactionTemplate.executeWithoutResult(status -> {
                     ChatHistory chat = chatHistoryRepository.findById(chatId)
                             .orElseThrow(() -> new ResourceNotFoundException("Chat history not found"));
+
+                    log.info("[DEBUG] OllamaServiceImpl: DB values before user message save. Messages in chat: count={}", chat.getMessages().size());
+                    for (Message m : chat.getMessages()) {
+                        log.info("[DEBUG] OllamaServiceImpl:   msg id={}, role={}, contentLength={}, createdAt={}", m.getId(), m.getRole(), m.getContent().length(), m.getCreatedAt());
+                    }
 
                     Message userMsg = Message.builder()
                             .chat(chat)
@@ -167,18 +172,23 @@ public class OllamaServiceImpl implements OllamaService {
                     chat.getMessages().add(userMsg);
                     chat.setUpdatedAt(LocalDateTime.now());
                     chatHistoryRepository.save(chat);
+
+                    log.info("[DEBUG] OllamaServiceImpl: DB values after user message save. Messages in chat: count={}", chat.getMessages().size());
+                    for (Message m : chat.getMessages()) {
+                        log.info("[DEBUG] OllamaServiceImpl:   msg id={}, role={}, contentLength={}, createdAt={}", m.getId(), m.getRole(), m.getContent().length(), m.getCreatedAt());
+                    }
                 });
-                log.info("OllamaServiceImpl async thread: user message saved successfully");
+                log.info("[DEBUG] OllamaServiceImpl async thread: user message saved successfully");
 
                 if (!isOllamaRunning()) {
-                    log.warn("OllamaServiceImpl async thread: Ollama service is not running");
+                    log.warn("[DEBUG] OllamaServiceImpl async thread: Ollama service is not running");
                     emitter.send(SseEmitter.event().name("error").data("Ollama service is not running or unreachable. Please start the Ollama server."));
                     emitter.complete();
                     return;
                 }
 
                 // Build payload (requires database read of chat messages, run inside transaction)
-                log.info("OllamaServiceImpl async thread: building chat payload");
+                log.info("[DEBUG] OllamaServiceImpl async thread: building chat payload");
                 String payload = transactionTemplate.execute(status -> {
                     try {
                         ChatHistory chat = chatHistoryRepository.findById(chatId)
@@ -188,10 +198,10 @@ public class OllamaServiceImpl implements OllamaService {
                         throw new RuntimeException(e);
                     }
                 });
-                log.info("OllamaServiceImpl async thread: payload built length={}", payload.length());
+                log.info("[DEBUG] OllamaServiceImpl async thread: payload built length={}", payload.length());
 
                 String activeUrl = getActiveOllamaUrl();
-                log.info("OllamaServiceImpl async thread: active Ollama URL={}", activeUrl);
+                log.info("[DEBUG] OllamaServiceImpl async thread: active Ollama URL={}", activeUrl);
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(activeUrl + "/api/chat"))
                         .header("Content-Type", "application/json")
@@ -199,9 +209,9 @@ public class OllamaServiceImpl implements OllamaService {
                         .POST(HttpRequest.BodyPublishers.ofString(payload))
                         .build();
 
-                log.info("OllamaServiceImpl async thread: sending HTTP request to Ollama");
+                log.info("[DEBUG] OllamaServiceImpl async thread: sending HTTP request to Ollama");
                 HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
-                log.info("OllamaServiceImpl async thread: Ollama response status code={}", response.statusCode());
+                log.info("[DEBUG] OllamaServiceImpl async thread: Ollama response status code={}", response.statusCode());
 
                 if (response.statusCode() != 200) {
                     emitter.send(SseEmitter.event().name("error").data("Ollama server returned error code " + response.statusCode()));
@@ -212,7 +222,7 @@ public class OllamaServiceImpl implements OllamaService {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(response.body(), StandardCharsets.UTF_8))) {
                     String line;
                     StringBuilder fullAssistantResponse = new StringBuilder();
-                    log.info("OllamaServiceImpl async thread: start reading and streaming response chunks");
+                    log.info("[DEBUG] OllamaServiceImpl async thread: start reading and streaming response chunks");
 
                     while ((line = reader.readLine()) != null) {
                         if (line.trim().isEmpty()) continue;
@@ -220,26 +230,34 @@ public class OllamaServiceImpl implements OllamaService {
                         JsonNode jsonNode = objectMapper.readTree(line);
                         if (jsonNode.has("message") && jsonNode.get("message").has("content")) {
                             String content = jsonNode.get("message").get("content").asText();
+                            log.info("[DEBUG] OllamaServiceImpl: received chunk content='{}'", content);
                             fullAssistantResponse.append(content);
 
                             // Send JSON wrapped chunk to client to preserve spaces and newlines
                             ObjectNode chunkNode = objectMapper.createObjectNode();
                             chunkNode.put("content", content);
-                            emitter.send(SseEmitter.event().data(objectMapper.writeValueAsString(chunkNode)));
+                            String chunkStr = objectMapper.writeValueAsString(chunkNode);
+                            log.info("[DEBUG] OllamaServiceImpl: sending chunk to emitter chunk='{}'", chunkStr);
+                            emitter.send(SseEmitter.event().data(chunkStr));
                         }
 
                         if (jsonNode.has("done") && jsonNode.get("done").asBoolean()) {
-                            log.info("OllamaServiceImpl async thread: done parsing response chunks");
+                            log.info("[DEBUG] OllamaServiceImpl async thread: done parsing response chunks");
                             break;
                         }
                     }
 
                     // Save assistant message to DB
                     final String assistantText = fullAssistantResponse.toString();
-                    log.info("OllamaServiceImpl async thread: saving assistant response to database length={}", assistantText.length());
+                    log.info("[DEBUG] OllamaServiceImpl async thread: saving assistant response to database length={}", assistantText.length());
                     transactionTemplate.executeWithoutResult(status -> {
                         ChatHistory chat = chatHistoryRepository.findById(chatId)
                                 .orElseThrow(() -> new ResourceNotFoundException("Chat history not found"));
+
+                        log.info("[DEBUG] OllamaServiceImpl: DB values before assistant message save. Messages in chat: count={}", chat.getMessages().size());
+                        for (Message m : chat.getMessages()) {
+                            log.info("[DEBUG] OllamaServiceImpl:   msg id={}, role={}, contentLength={}, createdAt={}", m.getId(), m.getRole(), m.getContent().length(), m.getCreatedAt());
+                        }
 
                         Message assistantMsg = Message.builder()
                                 .chat(chat)
@@ -249,16 +267,22 @@ public class OllamaServiceImpl implements OllamaService {
                         messageRepository.save(assistantMsg);
                         chat.getMessages().add(assistantMsg);
                         chatHistoryRepository.save(chat);
-                    });
-                    log.info("OllamaServiceImpl async thread: assistant response saved successfully");
 
+                        log.info("[DEBUG] OllamaServiceImpl: DB values after assistant message save. Messages in chat: count={}", chat.getMessages().size());
+                        for (Message m : chat.getMessages()) {
+                            log.info("[DEBUG] OllamaServiceImpl:   msg id={}, role={}, contentLength={}, createdAt={}", m.getId(), m.getRole(), m.getContent().length(), m.getCreatedAt());
+                        }
+                    });
+                    log.info("[DEBUG] OllamaServiceImpl async thread: assistant response saved successfully");
+
+                    log.info("[DEBUG] OllamaServiceImpl async thread: sending [DONE] to emitter");
                     emitter.send(SseEmitter.event().data("[DONE]"));
                     emitter.complete();
-                    log.info("OllamaServiceImpl async thread: stream completed and emitter completed");
+                    log.info("[DEBUG] OllamaServiceImpl async thread: stream completed and emitter completed");
                 }
 
             } catch (Exception e) {
-                log.error("Error in streaming response from Ollama", e);
+                log.error("[DEBUG] OllamaServiceImpl: Error in streaming response from Ollama", e);
                 try {
                     emitter.send(SseEmitter.event().name("error").data("Connection error: " + e.getMessage()));
                 } catch (Exception ex) {
