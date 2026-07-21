@@ -31,6 +31,7 @@ C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\exc
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\exception\ResourceNotFoundException.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\exception\UnauthorizedException.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\NovaAiApplication.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\provider\AiProvider.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\repository\ChatHistoryRepository.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\repository\DocumentRepository.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\repository\MemoryRepository.java
@@ -42,14 +43,18 @@ C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\sec
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\security\JwtAuthenticationFilter.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\security\JwtTokenProvider.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\FileService.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\GeminiService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\FileServiceImpl.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\GeminiServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\LocalSearchServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\MemoryServiceImpl.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\OllamaLocalServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\OllamaServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\PluginServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\UserServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\LocalSearchService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\MemoryService.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\OllamaLocalService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\OllamaService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\PluginService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\UserService.java
