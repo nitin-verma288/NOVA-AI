@@ -42,8 +42,10 @@ C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\rep
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\security\CustomUserDetailsService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\security\JwtAuthenticationFilter.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\security\JwtTokenProvider.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\ChatService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\FileService.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\GeminiService.java
+C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\ChatServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\FileServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\GeminiServiceImpl.java
 C:\Users\NITIN\OneDrive\Desktop\chatbotoff\backend\src\main\java\com\nova\ai\service\impl\LocalSearchServiceImpl.java
