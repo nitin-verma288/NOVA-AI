@@ -111,10 +111,17 @@ public class GeminiServiceImpl implements GeminiService {
             log.info("Gemini request completed (Sync) - Status: {}", response.statusCode());
 
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Failed to call Gemini API. HTTP Status: " + response.statusCode() + ", Response: " + response.body());
+                String errorBody = response.body();
+                log.error("Gemini API error (Sync) - HTTP {}: URL={}, Body={}",
+                        response.statusCode(), url.replaceAll("key=[^&]+", "key=REDACTED"), errorBody);
+                throw new RuntimeException("Failed to call Gemini API. HTTP Status: " + response.statusCode()
+                        + ", Model: " + activeModel
+                        + ", Response: " + errorBody);
             }
 
-            JsonNode root = objectMapper.readTree(response.body());
+            String responseBody = response.body();
+            log.debug("Gemini sync response received ({}  chars)", responseBody.length());
+            JsonNode root = objectMapper.readTree(responseBody);
             String assistantResponse = root.path("candidates").path(0).path("content").path("parts").path(0).path("text").asText("");
 
             // 3. Save assistant response
@@ -194,8 +201,13 @@ public class GeminiServiceImpl implements GeminiService {
                 if (response.statusCode() != 200) {
                     try (InputStream errStream = response.body()) {
                         String errMsg = new String(errStream.readAllBytes(), StandardCharsets.UTF_8);
-                        log.error("Gemini API streaming error response: {}", errMsg);
-                        emitter.send(SseEmitter.event().name("error").data("Gemini server returned error code " + response.statusCode() + ": " + errMsg));
+                        log.error("Gemini API streaming error - HTTP {}: URL={}, Body={}",
+                                response.statusCode(),
+                                url.replaceAll("key=[^&]+", "key=REDACTED"),
+                                errMsg);
+                        emitter.send(SseEmitter.event().name("error").data(
+                                "Gemini API error HTTP " + response.statusCode()
+                                + " for model '" + activeModel + "': " + errMsg));
                     }
                     emitter.complete();
                     return;
@@ -263,7 +275,8 @@ public class GeminiServiceImpl implements GeminiService {
 
     @Override
     public List<String> getAvailableModels() {
-        return List.of("gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash");
+        // gemini-2.0-flash is deprecated and returns 404 — only include currently supported models
+        return List.of("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-1.5-flash", "gemini-1.5-pro");
     }
 
     @Override
@@ -312,15 +325,27 @@ public class GeminiServiceImpl implements GeminiService {
     private String getApiKey() {
         String apiKey = System.getenv("GEMINI_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("GEMINI_API_KEY environment variable is not set.");
+            throw new IllegalStateException(
+                "GEMINI_API_KEY environment variable is not set. " +
+                "Please set this variable in your Render service environment settings.");
         }
-        return apiKey;
+        return apiKey.trim();
     }
 
     private String resolveGeminiModel(String modelName) {
+        // Only accept known Gemini model identifiers (must start with "gemini-")
         if (modelName != null && modelName.startsWith("gemini-")) {
+            // Reject deprecated models that return 404
+            if ("gemini-2.0-flash".equals(modelName) || "gemini-2.0-flash-exp".equals(modelName)) {
+                log.warn("Model '{}' is deprecated and may return 404. Falling back to default model: {}",
+                        modelName, defaultGeminiModel);
+                return defaultGeminiModel;
+            }
             return modelName;
         }
+        // Non-gemini model names (e.g. Ollama models like "gemma3:4b") → use Gemini default
+        log.debug("Model '{}' is not a Gemini model name; using default Gemini model: {}",
+                modelName, defaultGeminiModel);
         return defaultGeminiModel;
     }
 
