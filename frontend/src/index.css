@@ -5,8 +5,15 @@
 @tailwind utilities;
 
 @layer base {
+  html, body, #root {
+    height: 100%;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
   body {
-    @apply bg-[#09090b] text-[#f4f4f5] font-sans antialiased overflow-hidden selection:bg-zinc-800 selection:text-zinc-100;
+    @apply bg-[#09090b] text-[#f4f4f5] font-sans antialiased selection:bg-zinc-800 selection:text-zinc-100;
   }
 }
 

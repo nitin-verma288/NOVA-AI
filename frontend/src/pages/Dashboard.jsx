@@ -32,9 +32,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="h-screen h-[100dvh] w-screen flex bg-[#09090b] text-zinc-100 font-sans overflow-hidden">
+    <div className="h-full h-[100dvh] w-full flex bg-[#09090b] text-zinc-100 font-sans overflow-hidden">
       {/* Main layout container */}
-      <div className="flex-1 flex overflow-hidden relative w-full">
+      <div className="flex-1 flex overflow-hidden relative w-full h-full min-h-0">
         <Sidebar 
           activeTab={activeTab} 
           setActiveTab={setActiveTab} 
@@ -45,7 +45,7 @@ const Dashboard = () => {
           setMobileDrawerOpen={setMobileDrawerOpen}
         />
         
-        <div className="flex-1 flex flex-col overflow-hidden h-full min-w-0 w-full">
+        <div className="flex-1 flex flex-col overflow-hidden h-full min-h-0 min-w-0 w-full">
           <Navbar 
             activeTab={activeTab} 
             sidebarCollapsed={sidebarCollapsed}
@@ -53,7 +53,7 @@ const Dashboard = () => {
             mobileDrawerOpen={mobileDrawerOpen}
             setMobileDrawerOpen={setMobileDrawerOpen}
           />
-          <div className="flex-1 overflow-hidden bg-[#09090b] relative">
+          <div className="flex-1 flex flex-col overflow-hidden bg-[#09090b] relative min-h-0 min-w-0">
             {renderContent()}
           </div>
         </div>

@@ -147,12 +147,12 @@ const ChatArea = ({ sidebarCollapsed }) => {
   });
 
   return (
-    <div className="flex flex-col h-full w-full bg-[#09090b] relative overflow-hidden select-text min-w-0">
+    <div className="flex flex-col h-full min-h-0 w-full bg-[#09090b] relative overflow-hidden select-text min-w-0 flex-1">
       {/* Scrollable messages container */}
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6 scrollbar-thin scroll-smooth w-full min-w-0"
+        className="flex-1 overflow-y-auto min-h-0 px-3 sm:px-4 md:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6 scrollbar-thin scroll-smooth w-full min-w-0"
       >
         {messages.length === 0 ? (
           /* Empty state */
@@ -287,8 +287,11 @@ const ChatArea = ({ sidebarCollapsed }) => {
         </button>
       )}
 
-      {/* Bottom control panel / input box - fixed & sticky at bottom */}
-      <div className="border-t border-zinc-850 bg-[#09090b] px-3 sm:px-4 py-3 sm:py-4 shrink-0 z-20 w-full min-w-0">
+      {/* Bottom control panel / input box - sticky bottom & safe area padded */}
+      <div 
+        className="sticky bottom-0 border-t border-zinc-850 bg-[#09090b] px-3 sm:px-4 py-3 sm:py-4 shrink-0 z-20 w-full min-w-0"
+        style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
+      >
         <div className="max-w-3xl mx-auto relative w-full min-w-0">
           
           {/* Floating Action: Stop generating */}
