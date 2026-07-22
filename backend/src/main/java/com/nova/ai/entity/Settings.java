@@ -24,7 +24,7 @@ public class Settings {
 
     @Column(name = "model_name", nullable = false)
     @Builder.Default
-    private String modelName = "gemma3:4b";
+    private String modelName = "gemini-3-flash-preview";
 
     @Column(nullable = false)
     @Builder.Default

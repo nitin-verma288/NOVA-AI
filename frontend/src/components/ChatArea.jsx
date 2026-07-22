@@ -218,6 +218,7 @@ const ChatArea = ({ sidebarCollapsed }) => {
                       {isUser ? (
                         <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                       ) : (
+                        // console.log("MESSAGE =",msg.content);
                         <Markdown text={msg.content} />
                       )}
                     </div>

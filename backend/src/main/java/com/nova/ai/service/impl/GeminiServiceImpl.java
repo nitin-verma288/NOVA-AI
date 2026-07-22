@@ -43,7 +43,7 @@ public class GeminiServiceImpl implements GeminiService {
     private final HttpClient httpClient;
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
-    @Value("${nova.gemini.default-model:gemini-2.5-flash}")
+    @Value("${nova.gemini.default-model:gemini-3-flash-preview}")
     private String defaultGeminiModel;
 
     /**
@@ -51,11 +51,7 @@ public class GeminiServiceImpl implements GeminiService {
      * Any model NOT in this set will be rejected and replaced with defaultGeminiModel.
      */
     private static final java.util.Set<String> VALID_GEMINI_MODELS = java.util.Set.of(
-        "gemini-2.5-flash",
-        "gemini-2.5-flash-lite",
-        "gemini-1.5-flash",
-        "gemini-1.5-flash-8b",
-        "gemini-1.5-pro"
+     "gemini-3-flash-preview"
     );
 
     /** Deprecated models that unconditionally return HTTP 404 from the Gemini API. */
@@ -303,7 +299,7 @@ public class GeminiServiceImpl implements GeminiService {
     public List<String> getAvailableModels() {
         // Only return models that are confirmed valid on the current Gemini API.
         // gemini-2.0-flash and all other deprecated models are intentionally excluded.
-        return List.of("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro");
+        return List.of( "gemini-3-flash-preview");
     }
 
     @Override

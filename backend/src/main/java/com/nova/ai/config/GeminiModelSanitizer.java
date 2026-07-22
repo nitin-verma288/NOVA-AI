@@ -30,7 +30,7 @@ public class GeminiModelSanitizer {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Value("${nova.gemini.default-model:gemini-2.5-flash}")
+    @Value("${nova.gemini.default-model:gemini-3-flash-preview}")
     private String defaultGeminiModel;
 
     /**
@@ -54,11 +54,7 @@ public class GeminiModelSanitizer {
      * will also be replaced.
      */
     private static final Set<String> VALID_GEMINI_MODELS = Set.of(
-        "gemini-2.5-flash",
-        "gemini-2.5-flash-lite",
-        "gemini-1.5-flash",
-        "gemini-1.5-flash-8b",
-        "gemini-1.5-pro"
+        "gemini-3-flash-preview"
     );
 
     @PostConstruct
