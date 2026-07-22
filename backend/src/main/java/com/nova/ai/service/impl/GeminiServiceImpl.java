@@ -40,11 +40,35 @@ public class GeminiServiceImpl implements GeminiService {
     private final MemoryRepository memoryRepository;
     private final ObjectMapper objectMapper;
     private final TransactionTemplate transactionTemplate;
-    private final ExecutorService executorService = Executors.newCachedThreadPool();
     private final HttpClient httpClient;
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
 
     @Value("${nova.gemini.default-model:gemini-2.5-flash}")
     private String defaultGeminiModel;
+
+    /**
+     * The complete set of currently supported, non-deprecated Gemini model identifiers.
+     * Any model NOT in this set will be rejected and replaced with defaultGeminiModel.
+     */
+    private static final java.util.Set<String> VALID_GEMINI_MODELS = java.util.Set.of(
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-8b",
+        "gemini-1.5-pro"
+    );
+
+    /** Deprecated models that unconditionally return HTTP 404 from the Gemini API. */
+    private static final java.util.Set<String> DEPRECATED_GEMINI_MODELS = java.util.Set.of(
+        "gemini-2.0-flash",
+        "gemini-2.0-flash-exp",
+        "gemini-2.0-flash-thinking-exp",
+        "gemini-3.5-flash",
+        "gemini-1.0-pro",
+        "gemini-1.0-pro-vision",
+        "gemini-pro",
+        "gemini-pro-vision"
+    );
 
     public GeminiServiceImpl(ChatHistoryRepository chatHistoryRepository,
                              MessageRepository messageRepository,
@@ -99,7 +123,8 @@ public class GeminiServiceImpl implements GeminiService {
             String apiKey = getApiKey();
             String url = "https://generativelanguage.googleapis.com/v1beta/models/" + activeModel + ":generateContent?key=" + apiKey;
 
-            log.info("Gemini request started (Sync) - Model: {}", activeModel);
+            log.info("[MODEL] Sync request — stored='{}', resolved='{}', URL model='{}'  (user={})",
+                    settingsModel, activeModel, activeModel, user.getUsername());
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .header("Content-Type", "application/json")
@@ -187,7 +212,8 @@ public class GeminiServiceImpl implements GeminiService {
                 String apiKey = getApiKey();
                 String url = "https://generativelanguage.googleapis.com/v1beta/models/" + activeModel + ":streamGenerateContent?alt=sse&key=" + apiKey;
 
-                log.info("Gemini request started (Stream) - Model: {}", activeModel);
+                log.info("[MODEL] Stream request — stored='{}', resolved='{}', URL model='{}'  (user={})",
+                        settingsModel, activeModel, activeModel, user.getUsername());
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(url))
                         .header("Content-Type", "application/json")
@@ -275,8 +301,9 @@ public class GeminiServiceImpl implements GeminiService {
 
     @Override
     public List<String> getAvailableModels() {
-        // gemini-2.0-flash is deprecated and returns 404 — only include currently supported models
-        return List.of("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-1.5-flash", "gemini-1.5-pro");
+        // Only return models that are confirmed valid on the current Gemini API.
+        // gemini-2.0-flash and all other deprecated models are intentionally excluded.
+        return List.of("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro");
     }
 
     @Override
@@ -332,20 +359,50 @@ public class GeminiServiceImpl implements GeminiService {
         return apiKey.trim();
     }
 
+    /**
+     * Resolves the final Gemini model name to use for an API request.
+     *
+     * Resolution rules (in priority order):
+     *  1. null / blank                         → defaultGeminiModel
+     *  2. Explicitly deprecated Gemini model   → defaultGeminiModel  (logs WARN)
+     *  3. Valid known Gemini model              → used as-is          (logs INFO)
+     *  4. Unknown gemini-* model               → defaultGeminiModel  (logs WARN)
+     *  5. Non-Gemini name (e.g. Ollama model)  → defaultGeminiModel  (logs DEBUG)
+     *
+     * Three log lines are emitted at the call site (stored / resolved / URL).
+     */
     private String resolveGeminiModel(String modelName) {
-        // Only accept known Gemini model identifiers (must start with "gemini-")
-        if (modelName != null && modelName.startsWith("gemini-")) {
-            // Reject deprecated models that return 404
-            if ("gemini-2.0-flash".equals(modelName) || "gemini-2.0-flash-exp".equals(modelName)) {
-                log.warn("Model '{}' is deprecated and may return 404. Falling back to default model: {}",
-                        modelName, defaultGeminiModel);
-                return defaultGeminiModel;
-            }
-            return modelName;
+        // Rule 1: null or blank
+        if (modelName == null || modelName.trim().isEmpty()) {
+            log.warn("[MODEL] resolveGeminiModel: stored model is null/empty — using default: '{}'", defaultGeminiModel);
+            return defaultGeminiModel;
         }
-        // Non-gemini model names (e.g. Ollama models like "gemma3:4b") → use Gemini default
-        log.debug("Model '{}' is not a Gemini model name; using default Gemini model: {}",
-                modelName, defaultGeminiModel);
+
+        String trimmed = modelName.trim();
+
+        // Rule 2: explicitly deprecated
+        if (DEPRECATED_GEMINI_MODELS.contains(trimmed)) {
+            log.warn("[MODEL] resolveGeminiModel: stored='{}' is DEPRECATED (returns HTTP 404) — resolved to default: '{}'",
+                    trimmed, defaultGeminiModel);
+            return defaultGeminiModel;
+        }
+
+        // Rule 3: valid known Gemini model
+        if (VALID_GEMINI_MODELS.contains(trimmed)) {
+            log.info("[MODEL] resolveGeminiModel: stored='{}' is valid — resolved to: '{}'", trimmed, trimmed);
+            return trimmed;
+        }
+
+        // Rule 4: unknown gemini-* model (not in our validated set)
+        if (trimmed.startsWith("gemini-")) {
+            log.warn("[MODEL] resolveGeminiModel: stored='{}' starts with 'gemini-' but is NOT in the valid model set "
+                    + "— may return HTTP 404. Falling back to default: '{}'", trimmed, defaultGeminiModel);
+            return defaultGeminiModel;
+        }
+
+        // Rule 5: Ollama / non-Gemini model name stored while running on Render
+        log.debug("[MODEL] resolveGeminiModel: stored='{}' is not a Gemini model — using default: '{}'",
+                trimmed, defaultGeminiModel);
         return defaultGeminiModel;
     }
 
