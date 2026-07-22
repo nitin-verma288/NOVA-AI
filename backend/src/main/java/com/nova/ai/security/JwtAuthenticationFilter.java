@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -28,13 +29,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, java.io.IOException {
-                    log.info("Servlet Path = {}", request.getServletPath());
 
-                    log.info("Request URI = {}", request.getRequestURI());
+                 String path = request.getRequestURI();
+                    log.info("Servlet Path = {}",
+                     request.getServletPath());
+                    log.info("PATH = {}", path);
+                    log.info("Request URI = {}", 
+                    request.getRequestURI());
                 //  log.info("Servlet Path = {}", request.getServletPath());
-                    String path = request.getRequestURI();
+                   
 
-    if (path.equals("/auth/signup") || path.equals("/auth/login")) {
+    if (path.equals("/api/auth/signup")
+         || path.equals("/api/auth/login") 
+        || path.equals("/auth/signup") 
+        || path.equals("/auth/login")) {
         filterChain.doFilter(request, response);
         return;
     }

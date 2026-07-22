@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 import api, { API_BASE_URL } from '../services/api';
 
 const ChatContext = createContext(null);
 
 export const ChatProvider = ({ children }) => {
+  const {user} = useAuth();
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -49,8 +51,13 @@ export const ChatProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchChats();
-  }, []);
+    if(user){
+      fetchChats();
+    }else{
+      setChats([]);
+      setCurrentChat(null);
+    }
+  }, [user]);
 
   const selectChat = (chatId) => {
     const selected = chats.find(c => c.id === chatId);
