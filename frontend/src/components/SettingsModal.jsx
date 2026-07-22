@@ -50,13 +50,13 @@ const SettingsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 font-sans select-none animate-fade-in">
-      <div className="w-full max-w-[480px] rounded-2xl bg-[#18181b] border border-zinc-800 overflow-hidden flex flex-col max-h-[90vh] shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-3 sm:p-4 font-sans select-none animate-fade-in">
+      <div className="w-full max-w-[480px] rounded-2xl bg-[#18181b] border border-zinc-800 overflow-hidden flex flex-col max-h-[90vh] max-h-[90dvh] shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-zinc-800">
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-zinc-800">
           <div className="flex items-center gap-2.5">
-            <Sliders className="w-4.5 h-4.5 text-zinc-350" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider">Interface Configuration</h3>
+            <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-zinc-350" />
+            <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Interface Configuration</h3>
           </div>
           <button 
             onClick={onClose} 
@@ -67,7 +67,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto space-y-5 flex-grow text-xs text-zinc-300">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-5 flex-grow text-xs text-zinc-300">
           {loading ? (
             <div className="py-20 text-center text-zinc-400 font-medium uppercase tracking-wider animate-pulse">Syncing configuration variables...</div>
           ) : (

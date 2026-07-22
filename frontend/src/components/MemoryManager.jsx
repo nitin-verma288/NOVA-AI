@@ -104,40 +104,40 @@ const MemoryManager = () => {
   };
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col h-full bg-[#09090b] p-6 space-y-6">
+    <div className="flex-1 overflow-y-auto lg:overflow-hidden flex flex-col h-full bg-[#09090b] p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 w-full min-w-0">
       {/* Header section */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-5 shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-zinc-800 pb-4 sm:pb-5 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 border border-zinc-800 bg-zinc-900 flex items-center justify-center rounded-xl">
-            <Brain className="w-5 h-5 text-zinc-300" />
+          <div className="w-9 h-9 sm:w-10 sm:h-10 border border-zinc-800 bg-zinc-900 flex items-center justify-center rounded-xl shrink-0">
+            <Brain className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-300" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-white tracking-tight">Autonomous Profile Memories</h2>
-            <p className="text-xs text-zinc-400">Context variables collected proactively to enrich LLM response generation</p>
+            <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">Autonomous Profile Memories</h2>
+            <p className="text-[11px] sm:text-xs text-zinc-400">Context variables collected proactively to enrich LLM response generation</p>
           </div>
         </div>
 
         {/* Export / Import operations */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-start sm:self-auto">
           <button 
             onClick={handleExport}
-            className="stripe-btn-secondary py-1.5 px-3 text-xs"
+            className="stripe-btn-secondary py-1.5 px-2.5 sm:px-3 text-xs"
           >
             <Download className="w-3.5 h-3.5 text-zinc-400" />
-            Export Backup
+            <span className="hidden xs:inline">Export</span> Backup
           </button>
           
-          <label className="stripe-btn-secondary py-1.5 px-3 text-xs cursor-pointer select-none">
+          <label className="stripe-btn-secondary py-1.5 px-2.5 sm:px-3 text-xs cursor-pointer select-none">
             <Upload className="w-3.5 h-3.5 text-zinc-400" />
-            {importStatus === 'SUCCESS' ? 'Restored' : importStatus === 'ERROR' ? 'Failed' : 'Restore Backup'}
+            {importStatus === 'SUCCESS' ? 'Restored' : importStatus === 'ERROR' ? 'Failed' : 'Restore'}
             <input type="file" accept=".json" onChange={handleImport} className="hidden" />
           </label>
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="flex-1 overflow-y-auto lg:overflow-hidden grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 min-w-0">
         {/* Left Side: Create memory fact manually */}
-        <div className="lg:col-span-1 premium-card p-6 h-fit space-y-5">
+        <div className="lg:col-span-1 premium-card p-4 sm:p-6 h-fit space-y-4 sm:space-y-5">
           <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-zinc-800 pb-3">
             <Plus className="w-3.5 h-3.5 text-zinc-400" />
             Inject Fact Manually
@@ -145,7 +145,7 @@ const MemoryManager = () => {
           
           <form onSubmit={handleAdd} className="space-y-4">
             <div>
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-2">Category type</label>
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-1.5 sm:mb-2">Category type</label>
               <select 
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
@@ -158,10 +158,10 @@ const MemoryManager = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-2">Statement Fact</label>
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-1.5 sm:mb-2">Statement Fact</label>
               <textarea 
                 required
-                rows="4"
+                rows="3"
                 value={newFact}
                 onChange={(e) => setNewFact(e.target.value)}
                 placeholder="e.g. User prefers Python for microservices and React for frontend development."
@@ -179,11 +179,11 @@ const MemoryManager = () => {
         </div>
 
         {/* Right Side: List & Search memories */}
-        <div className="lg:col-span-2 flex flex-col space-y-4 overflow-hidden h-full">
+        <div className="lg:col-span-2 flex flex-col space-y-4 overflow-hidden h-full min-w-0">
           {/* Search bar & Category select badges */}
           <div className="flex flex-col gap-3 shrink-0">
             <div className="relative">
-              <Search className="absolute left-3 top-3 w-4 h-4 text-zinc-500" />
+              <Search className="absolute left-3 top-2.5 sm:top-3 w-4 h-4 text-zinc-500" />
               <input 
                 type="text" 
                 value={searchQuery}
@@ -199,7 +199,7 @@ const MemoryManager = () => {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`py-1 px-3 rounded-full text-xs font-medium transition duration-150 border ${
+                  className={`py-1 px-2.5 sm:px-3 rounded-full text-[11px] sm:text-xs font-medium transition duration-150 border shrink-0 ${
                     selectedCategory === cat 
                       ? 'bg-white border-white text-zinc-950 font-semibold' 
                       : 'bg-zinc-900 border-zinc-850 text-zinc-400 hover:text-white hover:bg-zinc-800'
@@ -212,11 +212,11 @@ const MemoryManager = () => {
           </div>
 
           {/* List display */}
-          <div className="flex-grow overflow-y-auto space-y-3 pr-1">
+          <div className="flex-grow overflow-y-auto space-y-3 pr-1 min-h-[250px]">
             {loading && memories.length === 0 ? (
-              <div className="py-20 text-center text-zinc-500 text-xs tracking-wider animate-pulse">Syncing memories...</div>
+              <div className="py-16 text-center text-zinc-500 text-xs tracking-wider animate-pulse">Syncing memories...</div>
             ) : memories.length === 0 ? (
-              <div className="py-16 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-xs leading-normal">
+              <div className="py-12 sm:py-16 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-xs leading-normal px-4">
                 No indexed facts match this category.
               </div>
             ) : (
@@ -228,9 +228,9 @@ const MemoryManager = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.15 }}
-                    className="premium-card p-4 flex items-start justify-between gap-4 group"
+                    className="premium-card p-3.5 sm:p-4 flex items-start justify-between gap-3 sm:gap-4 group"
                   >
-                    <div className="space-y-2 flex-grow min-w-0">
+                    <div className="space-y-1.5 sm:space-y-2 flex-grow min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="py-0.5 px-2 rounded bg-zinc-800 border border-zinc-750 text-[9px] font-semibold text-zinc-300 uppercase tracking-wider flex items-center gap-1">
                           <Tag className="w-2.5 h-2.5" />
@@ -245,7 +245,7 @@ const MemoryManager = () => {
 
                     <button
                       onClick={() => handleDelete(m.id)}
-                      className="p-1.5 rounded-lg bg-zinc-850 text-zinc-500 opacity-0 group-hover:opacity-100 hover:bg-red-950/40 hover:text-red-400 transition"
+                      className="p-1.5 rounded-lg bg-zinc-850 text-zinc-500 opacity-100 sm:opacity-0 group-hover:opacity-100 hover:bg-red-950/40 hover:text-red-400 transition shrink-0"
                       title="Delete fact"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

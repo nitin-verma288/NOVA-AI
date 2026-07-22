@@ -147,33 +147,33 @@ const ChatArea = ({ sidebarCollapsed }) => {
   });
 
   return (
-    <div className="flex flex-col h-full bg-[#09090b] relative overflow-hidden select-text">
+    <div className="flex flex-col h-full w-full bg-[#09090b] relative overflow-hidden select-text min-w-0">
       {/* Scrollable messages container */}
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto px-4 md:px-6 py-6 space-y-6 scrollbar-thin scroll-smooth"
+        className="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6 scrollbar-thin scroll-smooth w-full min-w-0"
       >
         {messages.length === 0 ? (
           /* Empty state */
-          <div className="max-w-2xl mx-auto pt-10 md:pt-16 flex flex-col items-center justify-center text-center space-y-8 select-none">
+          <div className="max-w-2xl mx-auto pt-6 sm:pt-10 md:pt-16 flex flex-col items-center justify-center text-center space-y-6 sm:space-y-8 select-none w-full px-2">
             <div className="flex flex-col items-center space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-lg relative">
-                <Sparkles className="w-6 h-6 text-zinc-300 animate-pulse" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-lg relative">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-300 animate-pulse" />
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-zinc-500 to-zinc-700 rounded-2xl blur opacity-20 -z-10"></div>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-white mt-4">NOVA Intelligence Engine</h2>
-              <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
+              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-white mt-2 sm:mt-4">NOVA Intelligence Engine</h2>
+              <p className="text-xs text-zinc-400 max-w-sm leading-relaxed px-2">
                 Connect and query local LLM nodes instantly. Enter queries below or select quick action prompts.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
               {SUGGESTED_PROMPTS.map((prompt) => (
                 <button
                   key={prompt.title}
                   onClick={() => handleSend(prompt.text)}
-                  className="p-4 rounded-xl border border-zinc-850 bg-zinc-900/20 text-left hover:border-zinc-750 hover:bg-zinc-900/50 transition duration-150 flex flex-col justify-between space-y-1"
+                  className="p-3.5 sm:p-4 rounded-xl border border-zinc-850 bg-zinc-900/20 text-left hover:border-zinc-750 hover:bg-zinc-900/50 transition duration-150 flex flex-col justify-between space-y-1 w-full"
                 >
                   <span className="text-xs font-semibold text-zinc-200">{prompt.title}</span>
                   <span className="text-[10px] text-zinc-500 leading-normal">{prompt.desc}</span>
@@ -183,7 +183,7 @@ const ChatArea = ({ sidebarCollapsed }) => {
           </div>
         ) : (
           /* Conversation stream */
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6 w-full min-w-0">
             {messages.map((msg, index) => {
               const isUser = msg.role === 'user';
               const isLastMsg = index === messages.length - 1;
@@ -191,35 +191,36 @@ const ChatArea = ({ sidebarCollapsed }) => {
               return (
                 <div 
                   key={msg.id || index}
-                  className={`flex gap-3.5 ${isUser ? 'justify-end' : 'justify-start'}`}
+                  className={`flex gap-2 sm:gap-3.5 ${isUser ? 'justify-end' : 'justify-start'} w-full min-w-0`}
                 >
                   {/* Left avatar icon */}
                   {!isUser && (
-                    <div className="w-8 h-8 rounded-lg border border-zinc-800 bg-zinc-900/60 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                      <Bot className="w-4 h-4 text-zinc-400" />
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-zinc-800 bg-zinc-900/60 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                      <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-400" />
                     </div>
                   )}
 
                   {/* Message body wrapper */}
-                  <div className="flex flex-col space-y-1.5 max-w-[85%]">
+                  <div className="flex flex-col space-y-1.5 max-w-[88%] sm:max-w-[85%] min-w-0">
                     {/* Username or identity label */}
-                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider select-none px-1">
+                    <span className={`text-[10px] font-bold text-zinc-500 uppercase tracking-wider select-none px-1 ${isUser ? 'text-right' : 'text-left'}`}>
                       {isUser ? (user?.username || 'You') : 'NOVA AI'}
                     </span>
 
                     {/* Message box */}
                     <div 
-                      className={`rounded-2xl px-4 py-3 shadow-sm border ${
+                      className={`rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 shadow-sm border min-w-0 overflow-hidden break-words ${
                         isUser 
                           ? 'bg-zinc-800/50 border-zinc-750 text-zinc-200' 
                           : 'bg-zinc-900/30 border-zinc-850 text-zinc-300'
                       }`}
                     >
                       {isUser ? (
-                        <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                        <p className="text-xs sm:text-sm whitespace-pre-wrap leading-relaxed break-words overflow-hidden">{msg.content}</p>
                       ) : (
-                        // console.log("MESSAGE =",msg.content);
-                        <Markdown text={msg.content} />
+                        <div className="min-w-0 overflow-hidden text-xs sm:text-sm">
+                          <Markdown text={msg.content} />
+                        </div>
                       )}
                     </div>
 
@@ -261,8 +262,8 @@ const ChatArea = ({ sidebarCollapsed }) => {
 
                   {/* Right avatar icon */}
                   {isUser && (
-                    <div className="w-8 h-8 rounded-lg border border-zinc-850 bg-zinc-900/40 flex items-center justify-center shrink-0 mt-0.5">
-                      <User className="w-4 h-4 text-zinc-500" />
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-zinc-850 bg-zinc-900/40 flex items-center justify-center shrink-0 mt-0.5">
+                      <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-500" />
                     </div>
                   )}
                 </div>
@@ -279,16 +280,16 @@ const ChatArea = ({ sidebarCollapsed }) => {
             setAutoScroll(true);
             scrollToBottom();
           }}
-          className="absolute right-6 bottom-28 md:right-10 p-2 rounded-full border border-zinc-800 bg-zinc-900/90 text-zinc-400 hover:text-white shadow-lg hover:scale-105 transition-all duration-150 z-10"
+          className="absolute right-4 bottom-24 sm:right-6 sm:bottom-28 md:right-10 p-2 rounded-full border border-zinc-800 bg-zinc-900/90 text-zinc-400 hover:text-white shadow-lg hover:scale-105 transition-all duration-150 z-20"
           title="Scroll to bottom"
         >
           <ArrowDown className="w-4 h-4" />
         </button>
       )}
 
-      {/* Bottom control panel / input box */}
-      <div className="border-t border-zinc-850 bg-[#09090b]/80 backdrop-blur-md px-4 py-4 shrink-0 z-10">
-        <div className="max-w-3xl mx-auto relative">
+      {/* Bottom control panel / input box - fixed & sticky at bottom */}
+      <div className="border-t border-zinc-850 bg-[#09090b] px-3 sm:px-4 py-3 sm:py-4 shrink-0 z-20 w-full min-w-0">
+        <div className="max-w-3xl mx-auto relative w-full min-w-0">
           
           {/* Floating Action: Stop generating */}
           {isStreaming && (
@@ -296,26 +297,26 @@ const ChatArea = ({ sidebarCollapsed }) => {
               <button
                 type="button"
                 onClick={stopGeneration}
-                className="py-1.5 px-3.5 rounded-lg border border-red-950 bg-red-950/20 text-red-400 text-xs font-semibold hover:bg-red-950/40 hover:border-red-900 transition-all flex items-center gap-2 shadow-sm select-none"
+                className="py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-lg border border-red-950 bg-red-950/20 text-red-400 text-[11px] sm:text-xs font-semibold hover:bg-red-950/40 hover:border-red-900 transition-all flex items-center gap-1.5 sm:gap-2 shadow-sm select-none"
               >
-                <StopCircle className="w-4 h-4 animate-pulse" />
+                <StopCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse shrink-0" />
                 Halt Response Stream
               </button>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="relative flex items-center">
+          <form onSubmit={handleSubmit} className="relative flex items-center w-full min-w-0">
             <textarea
               ref={textareaRef}
               rows={1}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask anything (Press Enter to send, Shift+Enter for new line)..."
-              className="w-full pl-4 pr-12 py-3 bg-[#141416] border border-zinc-850 text-zinc-200 text-xs rounded-xl placeholder-zinc-500 focus:outline-none focus:border-zinc-700 resize-none max-h-48 overflow-y-auto leading-relaxed scrollbar-none"
+              placeholder="Ask anything (Press Enter to send)..."
+              className="w-full pl-3.5 pr-11 sm:pl-4 sm:pr-12 py-2.5 sm:py-3 bg-[#141416] border border-zinc-850 text-zinc-200 text-xs rounded-xl placeholder-zinc-500 focus:outline-none focus:border-zinc-700 resize-none max-h-36 sm:max-h-48 overflow-y-auto leading-relaxed scrollbar-none"
             />
             
-            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center">
+            <div className="absolute right-2 sm:right-2.5 top-1/2 -translate-y-1/2 flex items-center">
               {isStreaming ? (
                 <button
                   type="button"
@@ -338,8 +339,8 @@ const ChatArea = ({ sidebarCollapsed }) => {
             </div>
           </form>
           
-          <div className="mt-2 text-center select-none">
-            <span className="text-[9px] text-zinc-600 font-mono tracking-wider">
+          <div className="mt-1.5 sm:mt-2 text-center select-none">
+            <span className="text-[8px] sm:text-[9px] text-zinc-600 font-mono tracking-wider">
               RUNNING LOCAL OLLAMA SUITE // POWERED BY GEMMA3 & QWEN3
             </span>
           </div>

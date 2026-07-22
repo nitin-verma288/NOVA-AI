@@ -34,20 +34,20 @@ const LocalSearch = () => {
   };
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col h-full bg-[#09090b] p-6 space-y-6">
+    <div className="flex-1 overflow-y-auto lg:overflow-hidden flex flex-col h-full bg-[#09090b] p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 w-full min-w-0">
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-zinc-800 pb-5 shrink-0">
-        <div className="w-10 h-10 border border-zinc-800 bg-zinc-900 flex items-center justify-center rounded-xl">
-          <Search className="w-5 h-5 text-zinc-300" />
+      <div className="flex items-center gap-3 border-b border-zinc-800 pb-4 sm:pb-5 shrink-0">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 border border-zinc-800 bg-zinc-900 flex items-center justify-center rounded-xl shrink-0">
+          <Search className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-300" />
         </div>
         <div>
-          <h2 className="text-base font-bold text-white tracking-tight">Local File System Search</h2>
-          <p className="text-xs text-zinc-400">Index directories recursively, matching filenames or code contents on the fly</p>
+          <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">Local File System Search</h2>
+          <p className="text-[11px] sm:text-xs text-zinc-400">Index directories recursively, matching filenames or code contents on the fly</p>
         </div>
       </div>
 
       {/* Input controls form */}
-      <form onSubmit={handleSearch} className="premium-card p-5 grid grid-cols-1 md:grid-cols-12 gap-4 shrink-0">
+      <form onSubmit={handleSearch} className="premium-card p-4 sm:p-5 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 shrink-0">
         <div className="md:col-span-6">
           <label className="block text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">Search Query</label>
           <input 
@@ -75,7 +75,7 @@ const LocalSearch = () => {
           <button 
             type="submit" 
             disabled={searching || !query.trim()}
-            className="stripe-btn-primary w-full py-2"
+            className="stripe-btn-primary w-full py-2 text-xs font-semibold"
           >
             {searching ? 'Searching...' : 'Run Search'}
           </button>
@@ -83,16 +83,16 @@ const LocalSearch = () => {
       </form>
 
       {/* Results grid */}
-      <div className="flex-grow overflow-hidden flex flex-col space-y-3">
+      <div className="flex-grow overflow-hidden flex flex-col space-y-3 min-w-0">
         <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">
           Found {results.length} Matches
         </span>
 
-        <div className="flex-grow overflow-y-auto space-y-3 pr-1">
+        <div className="flex-grow overflow-y-auto space-y-3 pr-1 min-h-[220px]">
           {searching && results.length === 0 ? (
-            <div className="py-20 text-center text-zinc-500 text-xs tracking-wider animate-pulse">Running crawler...</div>
+            <div className="py-16 text-center text-zinc-500 text-xs tracking-wider animate-pulse">Running crawler...</div>
           ) : results.length === 0 ? (
-            <div className="py-16 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-xs">
+            <div className="py-12 sm:py-16 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-xs px-4">
               No results found. Adjust search query or check the target root path.
             </div>
           ) : (
@@ -103,9 +103,9 @@ const LocalSearch = () => {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.15, delay: Math.min(index * 0.015, 0.2) }}
-                  className="premium-card p-4 flex flex-col gap-3 group"
+                  className="premium-card p-3.5 sm:p-4 flex flex-col gap-3 group"
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 sm:gap-4">
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-8 h-8 bg-zinc-800 border border-zinc-700 flex items-center justify-center rounded-lg shrink-0">
                         {getFileIcon(res.type)}
@@ -123,22 +123,22 @@ const LocalSearch = () => {
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-end shrink-0 text-[10px] text-zinc-550 font-mono select-none">
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start shrink-0 text-[10px] text-zinc-550 font-mono select-none pt-1 sm:pt-0 border-t sm:border-t-0 border-zinc-850">
                       <span className="flex items-center gap-1.5">
-                        <Database className="w-3.5 h-3.5 text-zinc-650" />
+                        <Database className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-650" />
                         {(res.size / 1024).toFixed(1)} KB
                       </span>
-                      <span className="flex items-center gap-1.5 mt-1">
-                        <Calendar className="w-3.5 h-3.5 text-zinc-650" />
+                      <span className="flex items-center gap-1.5 sm:mt-1">
+                        <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-650" />
                         {res.lastModified}
                       </span>
                     </div>
                   </div>
 
                   {res.matchSnippet && (
-                    <div className="bg-zinc-900/40 border border-zinc-850 p-3 rounded-xl flex items-start gap-2.5">
+                    <div className="bg-zinc-900/40 border border-zinc-850 p-2.5 sm:p-3 rounded-xl flex items-start gap-2.5 min-w-0">
                       <Layers className="w-4 h-4 mt-0.5 text-zinc-500 shrink-0" />
-                      <pre className="text-xs font-mono text-zinc-350 whitespace-pre-wrap leading-relaxed truncate-3-lines flex-grow">
+                      <pre className="text-xs font-mono text-zinc-350 whitespace-pre-wrap leading-relaxed truncate-3-lines flex-grow overflow-x-auto">
                         {res.matchSnippet}
                       </pre>
                     </div>

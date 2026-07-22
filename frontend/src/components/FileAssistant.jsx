@@ -139,19 +139,19 @@ const FileAssistant = () => {
   };
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col h-full bg-[#09090b] p-6 space-y-6">
+    <div className="flex-1 overflow-y-auto lg:overflow-hidden flex flex-col h-full bg-[#09090b] p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 w-full min-w-0">
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-zinc-800 pb-5 shrink-0">
-        <div className="w-10 h-10 border border-zinc-800 bg-zinc-900 flex items-center justify-center rounded-xl">
-          <FileText className="w-5 h-5 text-zinc-300" />
+      <div className="flex items-center gap-3 border-b border-zinc-800 pb-4 sm:pb-5 shrink-0">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 border border-zinc-800 bg-zinc-900 flex items-center justify-center rounded-xl shrink-0">
+          <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-300" />
         </div>
         <div>
-          <h2 className="text-base font-bold text-white tracking-tight">Document Knowledge Workspace</h2>
-          <p className="text-xs text-zinc-400">Upload PDFs, Word files, Spreadsheets, CSV, or Text and query them offline</p>
+          <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">Document Knowledge Workspace</h2>
+          <p className="text-[11px] sm:text-xs text-zinc-400">Upload PDFs, Word files, Spreadsheets, CSV, or Text and query them offline</p>
         </div>
       </div>
 
-      <div className="flex-grow overflow-hidden">
+      <div className="flex-grow overflow-y-auto lg:overflow-hidden min-w-0">
         <AnimatePresence mode="wait">
           {!selectedDoc ? (
             /* Document List View */
@@ -159,16 +159,16 @@ const FileAssistant = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full overflow-hidden"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 h-full overflow-y-auto lg:overflow-hidden min-w-0"
             >
               {/* Left Column: Drag & Drop Zone */}
-              <div className="lg:col-span-1 flex flex-col h-full justify-between gap-5">
+              <div className="lg:col-span-1 flex flex-col h-fit lg:h-full justify-between gap-4 sm:gap-5 min-w-0">
                 <div 
                   onDragEnter={handleDrag}
                   onDragOver={handleDrag}
                   onDragLeave={handleDrag}
                   onDrop={handleDrop}
-                  className={`flex-grow border border-dashed rounded-2xl flex flex-col items-center justify-center p-6 text-center transition duration-200 relative ${
+                  className={`min-h-[160px] lg:flex-grow border border-dashed rounded-2xl flex flex-col items-center justify-center p-4 sm:p-6 text-center transition duration-200 relative ${
                     dragActive 
                       ? 'border-white bg-zinc-900/50' 
                       : 'border-zinc-850 hover:border-zinc-700 bg-zinc-900/10'
@@ -183,33 +183,33 @@ const FileAssistant = () => {
                   />
                   
                   {uploading ? (
-                    <div className="flex flex-col items-center gap-3 select-none">
-                      <RefreshCw className="w-8 h-8 text-zinc-400 animate-spin" />
+                    <div className="flex flex-col items-center gap-2.5 select-none">
+                      <RefreshCw className="w-7 h-7 sm:w-8 sm:h-8 text-zinc-400 animate-spin" />
                       <p className="text-xs font-semibold text-white uppercase tracking-wider">Parsing files...</p>
                       <p className="text-[10px] text-zinc-500 italic">Running local text extraction models</p>
                     </div>
                   ) : (
-                    <label htmlFor="file-upload-input" className="cursor-pointer flex flex-col items-center gap-3 select-none">
-                      <div className="w-10 h-10 bg-zinc-900 border border-zinc-800 flex items-center justify-center rounded-xl">
-                        <Upload className="w-5 h-5 text-zinc-400" />
+                    <label htmlFor="file-upload-input" className="cursor-pointer flex flex-col items-center gap-2.5 select-none">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 bg-zinc-900 border border-zinc-800 flex items-center justify-center rounded-xl">
+                        <Upload className="w-4.5 h-4.5 text-zinc-400" />
                       </div>
                       <p className="text-xs font-semibold text-white">Drag & drop files here</p>
                       <p className="text-[10px] text-zinc-500">or click to browse local files</p>
-                      <span className="mt-4 px-2.5 py-1 rounded bg-zinc-900 border border-zinc-850 text-[9px] text-zinc-400 font-mono">PDF, DOCX, XLSX, CSV, TXT</span>
+                      <span className="mt-2 sm:mt-4 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-zinc-900 border border-zinc-850 text-[9px] text-zinc-400 font-mono">PDF, DOCX, XLSX, CSV, TXT</span>
                     </label>
                   )}
                 </div>
               </div>
 
               {/* Right Column: Existing Documents Grid */}
-              <div className="lg:col-span-2 flex flex-col space-y-4 overflow-hidden h-full">
+              <div className="lg:col-span-2 flex flex-col space-y-3 sm:space-y-4 overflow-hidden h-full min-w-0">
                 <h3 className="text-xs font-bold text-white uppercase tracking-wider">Indexed Knowledge Base</h3>
                 
-                <div className="flex-grow overflow-y-auto space-y-2.5 pr-1">
+                <div className="flex-grow overflow-y-auto space-y-2.5 pr-1 min-h-[220px]">
                   {loading && documents.length === 0 ? (
-                    <div className="py-20 text-center text-zinc-500 text-xs tracking-wider animate-pulse">Scanning folders...</div>
+                    <div className="py-16 text-center text-zinc-500 text-xs tracking-wider animate-pulse">Scanning folders...</div>
                   ) : documents.length === 0 ? (
-                    <div className="py-16 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-xs">
+                    <div className="py-12 sm:py-16 text-center border border-dashed border-zinc-800 rounded-2xl text-zinc-500 text-xs px-4">
                       No documents parsed yet. Upload files to initialize indexing context.
                     </div>
                   ) : (
@@ -217,21 +217,21 @@ const FileAssistant = () => {
                       <div 
                         key={doc.id}
                         onClick={() => selectDoc(doc)}
-                        className="premium-card p-4 flex items-center justify-between gap-4 cursor-pointer group"
+                        className="premium-card p-3.5 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer group"
                       >
-                        <div className="flex items-center gap-3.5 min-w-0">
-                          <div className="w-9 h-9 bg-zinc-800 border border-zinc-700 flex items-center justify-center rounded-xl shrink-0">
-                            <FileText className="w-4.5 h-4.5 text-zinc-350" />
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-8 h-8 sm:w-9 sm:h-9 bg-zinc-800 border border-zinc-700 flex items-center justify-center rounded-xl shrink-0">
+                            <FileText className="w-4 h-4 text-zinc-350" />
                           </div>
                           <div className="min-w-0">
                             <h4 className="text-xs font-semibold text-white truncate">{doc.fileName}</h4>
-                            <p className="text-[9px] text-zinc-500 mt-0.5 uppercase tracking-wide">
+                            <p className="text-[9px] text-zinc-500 mt-0.5 uppercase tracking-wide truncate">
                               {doc.fileType} • {(doc.fileSize / 1024).toFixed(1)} KB • {new Date(doc.createdAt).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition duration-150">
+                        <div className="flex items-center gap-1 opacity-100 sm:opacity-0 group-hover:opacity-100 transition duration-150 shrink-0">
                           <button className="p-1.5 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white transition">
                             <Eye className="w-3.5 h-3.5" />
                           </button>
@@ -254,10 +254,10 @@ const FileAssistant = () => {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full overflow-hidden"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 h-full overflow-y-auto lg:overflow-hidden min-w-0"
             >
               {/* Back key + Document Details Panel */}
-              <div className="lg:col-span-5 flex flex-col space-y-4 overflow-hidden h-full">
+              <div className="lg:col-span-5 flex flex-col space-y-3 sm:space-y-4 overflow-hidden h-fit lg:h-full min-w-0">
                 <button 
                   onClick={() => setSelectedDoc(null)}
                   className="stripe-btn-secondary self-start py-1.5 px-3 text-xs"
@@ -266,14 +266,14 @@ const FileAssistant = () => {
                   Return to Database
                 </button>
 
-                <div className="flex-grow premium-card p-5 flex flex-col space-y-5 overflow-hidden">
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 bg-zinc-800 border border-zinc-700 flex items-center justify-center rounded-xl shrink-0">
-                      <FileText className="w-4.5 h-4.5 text-zinc-350" />
+                <div className="flex-grow premium-card p-4 sm:p-5 flex flex-col space-y-4 sm:space-y-5 overflow-hidden">
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-zinc-800 border border-zinc-700 flex items-center justify-center rounded-xl shrink-0">
+                      <FileText className="w-4 h-4 text-zinc-350" />
                     </div>
                     <div className="min-w-0">
                       <h3 className="text-xs font-bold text-white leading-tight truncate">{selectedDoc.fileName}</h3>
-                      <p className="text-[9px] text-zinc-500 mt-1 uppercase">
+                      <p className="text-[9px] text-zinc-500 mt-1 uppercase truncate">
                         {selectedDoc.fileType} • {(selectedDoc.fileSize / 1024).toFixed(1)} KB
                       </p>
                     </div>
@@ -283,7 +283,7 @@ const FileAssistant = () => {
                   <div className="flex border-b border-zinc-800 select-none">
                     <button 
                       onClick={() => setActiveTab('summary')}
-                      className={`flex-grow pb-2.5 text-xs font-semibold border-b-2 transition-colors duration-150 ${
+                      className={`flex-grow pb-2 text-xs font-semibold border-b-2 transition-colors duration-150 ${
                         activeTab === 'summary' ? 'border-zinc-300 text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
                       }`}
                     >
@@ -291,8 +291,8 @@ const FileAssistant = () => {
                     </button>
                     <button 
                       onClick={() => setActiveTab('fullText')}
-                      className={`flex-grow pb-2.5 text-xs font-semibold border-b-2 transition-colors duration-150 ${
-                        activeTab === 'fullText' ? 'border-zinc-300 text-white' : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                      className={`flex-grow pb-2 text-xs font-semibold border-b-2 transition-colors duration-150 ${
+                        activeTab === 'fullText' ? 'border-transparent text-zinc-500 hover:text-zinc-300' : 'border-transparent text-zinc-500 hover:text-zinc-300'
                       }`}
                     >
                       Extracted Content
@@ -300,18 +300,18 @@ const FileAssistant = () => {
                   </div>
 
                   {/* Tab Contents */}
-                  <div className="flex-grow overflow-y-auto text-xs leading-relaxed text-zinc-300 pr-1">
+                  <div className="flex-grow overflow-y-auto text-xs leading-relaxed text-zinc-300 pr-1 max-h-[220px] lg:max-h-none">
                     {activeTab === 'summary' ? (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <h4 className="font-semibold text-white uppercase tracking-wider text-[9px]">AI-Generated Brief</h4>
-                        <div className="whitespace-pre-line bg-zinc-900/50 p-4 rounded-xl border border-zinc-800">
+                        <div className="whitespace-pre-line bg-zinc-900/50 p-3 sm:p-4 rounded-xl border border-zinc-800">
                           {selectedDoc.summary}
                         </div>
                       </div>
                     ) : (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <h4 className="font-semibold text-white uppercase tracking-wider text-[9px]">Raw Extracted Text</h4>
-                        <pre className="whitespace-pre-wrap font-sans bg-zinc-900/50 p-4 rounded-xl border border-zinc-800 max-h-[38vh] overflow-y-auto">
+                        <pre className="whitespace-pre-wrap font-sans bg-zinc-900/50 p-3 sm:p-4 rounded-xl border border-zinc-800 max-h-[30vh] lg:max-h-[38vh] overflow-y-auto">
                           {docContent || 'Loading document text from database...'}
                         </pre>
                       </div>
@@ -321,14 +321,14 @@ const FileAssistant = () => {
               </div>
 
               {/* RAG Q&A Console */}
-              <div className="lg:col-span-7 premium-card p-5 flex flex-col space-y-4 h-full overflow-hidden">
+              <div className="lg:col-span-7 premium-card p-4 sm:p-5 flex flex-col space-y-3 sm:space-y-4 h-fit lg:h-full overflow-hidden min-w-0">
                 <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-zinc-800 pb-3">
                   <HelpCircle className="w-3.5 h-3.5 text-zinc-400" />
                   Ask Question about this Document
                 </h3>
 
                 {/* Chat screen */}
-                <div className="flex-grow overflow-y-auto bg-zinc-900/30 p-4 rounded-xl border border-zinc-850 space-y-4">
+                <div className="flex-grow overflow-y-auto bg-zinc-900/30 p-3.5 sm:p-4 rounded-xl border border-zinc-850 space-y-3 min-h-[160px]">
                   {answer ? (
                     <div className="space-y-2">
                       <div className="text-[9px] uppercase font-semibold text-zinc-400 flex items-center gap-1.5">
@@ -338,15 +338,15 @@ const FileAssistant = () => {
                       <p className="text-xs text-zinc-200 leading-relaxed whitespace-pre-wrap">{answer}</p>
                     </div>
                   ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-center text-zinc-650 p-6 select-none">
-                      <HelpCircle className="w-8 h-8 mb-2 text-zinc-700" />
+                    <div className="h-full flex flex-col items-center justify-center text-center text-zinc-650 p-4 select-none">
+                      <HelpCircle className="w-7 h-7 sm:w-8 sm:h-8 mb-2 text-zinc-700" />
                       <p className="text-xs text-zinc-500 leading-relaxed">Type a query below to retrieve and analyze document contents offline using RAG embeddings.</p>
                     </div>
                   )}
                 </div>
 
                 {/* Query box */}
-                <form onSubmit={handleQuery} className="flex gap-2 shrink-0">
+                <form onSubmit={handleQuery} className="flex flex-col sm:flex-row gap-2 shrink-0">
                   <input 
                     type="text" 
                     required

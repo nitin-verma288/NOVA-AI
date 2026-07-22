@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('chat');
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -31,24 +32,28 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="h-screen w-screen flex bg-[#09090b] text-zinc-100 font-sans overflow-hidden">
+    <div className="h-screen h-[100dvh] w-screen flex bg-[#09090b] text-zinc-100 font-sans overflow-hidden">
       {/* Main layout container */}
-      <div className="flex-1 flex overflow-hidden relative">
+      <div className="flex-1 flex overflow-hidden relative w-full">
         <Sidebar 
           activeTab={activeTab} 
           setActiveTab={setActiveTab} 
           onOpenSettings={() => setSettingsOpen(true)} 
           sidebarCollapsed={sidebarCollapsed}
           setSidebarCollapsed={setSidebarCollapsed}
+          mobileDrawerOpen={mobileDrawerOpen}
+          setMobileDrawerOpen={setMobileDrawerOpen}
         />
         
-        <div className="flex-1 flex flex-col overflow-hidden h-full">
+        <div className="flex-1 flex flex-col overflow-hidden h-full min-w-0 w-full">
           <Navbar 
             activeTab={activeTab} 
             sidebarCollapsed={sidebarCollapsed}
             setSidebarCollapsed={setSidebarCollapsed}
+            mobileDrawerOpen={mobileDrawerOpen}
+            setMobileDrawerOpen={setMobileDrawerOpen}
           />
-          <div className="flex-1 overflow-hidden bg-[#09090b]">
+          <div className="flex-1 overflow-hidden bg-[#09090b] relative">
             {renderContent()}
           </div>
         </div>

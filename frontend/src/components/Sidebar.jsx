@@ -13,10 +13,19 @@ import {
   Settings, 
   LogOut, 
   Terminal, 
-  PanelLeftClose 
+  PanelLeftClose,
+  X
 } from 'lucide-react';
 
-const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, setSidebarCollapsed }) => {
+const Sidebar = ({ 
+  activeTab, 
+  setActiveTab, 
+  onOpenSettings, 
+  sidebarCollapsed, 
+  setSidebarCollapsed,
+  mobileDrawerOpen,
+  setMobileDrawerOpen 
+}) => {
   const { chats, currentChat, createChat, deleteChat, togglePinChat, selectChat } = useChat();
   const { user, logout } = useAuth();
   const [historySearch, setHistorySearch] = useState('');
@@ -24,6 +33,18 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
   const handleNewChat = () => {
     createChat();
     setActiveTab('chat');
+    if (setMobileDrawerOpen) setMobileDrawerOpen(false);
+  };
+
+  const handleTabSelect = (tabId) => {
+    setActiveTab(tabId);
+    if (setMobileDrawerOpen) setMobileDrawerOpen(false);
+  };
+
+  const handleChatSelect = (chatId) => {
+    selectChat(chatId);
+    setActiveTab('chat');
+    if (setMobileDrawerOpen) setMobileDrawerOpen(false);
   };
 
   const navItems = [
@@ -39,12 +60,8 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
     c.title.toLowerCase().includes(historySearch.toLowerCase())
   );
 
-  if (sidebarCollapsed) {
-    return null;
-  }
-
-  return (
-    <div className="w-[260px] bg-[#0c0c0e] border-r border-zinc-800 flex flex-col h-full overflow-hidden shrink-0 transition-all duration-300">
+  const sidebarContent = (
+    <div className="w-[280px] sm:w-[260px] bg-[#0c0c0e] border-r border-zinc-800 flex flex-col h-full overflow-hidden shrink-0 shadow-2xl md:shadow-none">
       {/* Brand header */}
       <div className="flex items-center justify-between p-4 border-b border-zinc-800">
         <div className="flex items-center gap-2.5">
@@ -56,12 +73,21 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
             <span className="text-[9px] text-zinc-500 font-mono">v1.0.0 // OFFLINE</span>
           </div>
         </div>
+
+        {/* Mobile close button / Desktop collapse button */}
         <button
-          onClick={() => setSidebarCollapsed(true)}
-          className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-950 transition-colors"
-          title="Collapse Sidebar"
+          onClick={() => {
+            if (mobileDrawerOpen && setMobileDrawerOpen) {
+              setMobileDrawerOpen(false);
+            } else {
+              setSidebarCollapsed(true);
+            }
+          }}
+          className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"
+          title="Close Sidebar"
         >
-          <PanelLeftClose className="w-4 h-4" />
+          <span className="md:hidden"><X className="w-4 h-4" /></span>
+          <span className="hidden md:inline"><PanelLeftClose className="w-4 h-4" /></span>
         </button>
       </div>
 
@@ -84,8 +110,8 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
           return (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`w-full py-1.5 px-3 rounded-lg flex items-center gap-2.5 text-xs font-medium transition-all duration-150 ${
+              onClick={() => handleTabSelect(item.id)}
+              className={`w-full py-2 sm:py-1.5 px-3 rounded-lg flex items-center gap-2.5 text-xs font-medium transition-all duration-150 ${
                 isActive
                   ? 'bg-zinc-800 text-white'
                   : 'text-zinc-400 hover:text-white hover:bg-zinc-900/50'
@@ -103,17 +129,17 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
       {/* Chat History Search & Listing */}
       <div className="flex-1 overflow-y-auto px-2 space-y-2 min-h-0 flex flex-col">
         <div className="relative px-1">
-          <Search className="absolute left-3 top-2 w-3.5 h-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 sm:top-2 w-3.5 h-3.5 text-zinc-500" />
           <input 
             type="text"
             value={historySearch}
             onChange={(e) => setHistorySearch(e.target.value)}
             placeholder="Search conversations..."
-            className="w-full pl-8 pr-3 py-1.5 bg-[#09090b] border border-zinc-800 text-zinc-300 text-xs rounded-lg placeholder-zinc-500 focus:outline-none focus:border-zinc-700 transition"
+            className="w-full pl-8 pr-3 py-2 sm:py-1.5 bg-[#09090b] border border-zinc-800 text-zinc-300 text-xs rounded-lg placeholder-zinc-500 focus:outline-none focus:border-zinc-700 transition"
           />
         </div>
 
-        <div className="flex-grow overflow-y-auto space-y-0.5 mt-1.5">
+        <div className="flex-grow overflow-y-auto space-y-0.5 mt-1.5 pr-0.5">
           {filteredChats.length === 0 ? (
             <span className="block text-[10px] text-zinc-500 italic px-2.5 py-4">
               {historySearch ? 'No matches found' : 'No history'}
@@ -124,11 +150,8 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
               return (
                 <div
                   key={c.id}
-                  onClick={() => {
-                    selectChat(c.id);
-                    setActiveTab('chat');
-                  }}
-                  className={`group py-1.5 px-2.5 rounded-lg flex items-center justify-between gap-2 cursor-pointer transition-all duration-150 ${
+                  onClick={() => handleChatSelect(c.id)}
+                  className={`group py-2 sm:py-1.5 px-2.5 rounded-lg flex items-center justify-between gap-2 cursor-pointer transition-all duration-150 ${
                     isSelected
                       ? 'bg-zinc-900 text-white'
                       : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/40'
@@ -139,7 +162,7 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
                     <span className="text-xs truncate font-normal pr-1">{c.title}</span>
                   </div>
 
-                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                  <div className="flex items-center gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -171,7 +194,7 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
       {/* User profile footer */}
       <div className="p-3 bg-[#09090b] border-t border-zinc-800 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center font-semibold text-zinc-200 uppercase text-xs">
+          <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center font-semibold text-zinc-200 uppercase text-xs shrink-0">
             {user?.username?.substring(0, 2) || 'US'}
           </div>
           <div className="min-w-0">
@@ -180,9 +203,12 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
           </div>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 shrink-0">
           <button
-            onClick={onOpenSettings}
+            onClick={() => {
+              onOpenSettings();
+              if (setMobileDrawerOpen) setMobileDrawerOpen(false);
+            }}
             className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"
             title="Open Configurations"
           >
@@ -198,6 +224,32 @@ const Sidebar = ({ activeTab, setActiveTab, onOpenSettings, sidebarCollapsed, se
         </div>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Off-Canvas Overlay Drawer (< md screen size) */}
+      {mobileDrawerOpen && (
+        <div className="fixed inset-0 z-50 flex md:hidden">
+          {/* Backdrop overlay */}
+          <div 
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+            onClick={() => setMobileDrawerOpen(false)}
+          />
+          {/* Drawer content */}
+          <div className="relative z-10 flex h-full animate-fade-in">
+            {sidebarContent}
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Sidebar (md+ screen size) */}
+      {!sidebarCollapsed && (
+        <div className="hidden md:flex h-full">
+          {sidebarContent}
+        </div>
+      )}
+    </>
   );
 };
 
